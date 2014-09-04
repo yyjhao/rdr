@@ -1,0 +1,8 @@
+*~
+*.pyc
+node_modules
+web/config.json
+base/config.py
+web/static/*
+web/.sass*
+web/node_modules/*
