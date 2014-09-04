@@ -1,14 +1,18 @@
 
 from __future__ import print_function
 
+from sqlalchemy import or_
+
 import logging
 import numpy as np
 from optparse import OptionParser
 import sys
 from time import time
 import matplotlib.pyplot as plt
+import random
+from urlparse import urlparse
+from unidecode import unidecode
 
-from sklearn.datasets import fetch_20newsgroups
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import HashingVectorizer
 from sklearn.feature_selection import SelectKBest, chi2
@@ -23,101 +27,86 @@ from sklearn.neighbors import NearestCentroid
 from sklearn.utils.extmath import density
 from sklearn import metrics
 
+from base.models import Article
+from base.database import db_session
+
+from pandas import DataFrame
+
+use_hashing = False
+select_chi2 = 0
+print_report = True
+n_features = 2 ** 16
+
+categories = [
+    "like",
+    "pass",
+]
 
 # Display progress logs on stdout
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(message)s')
 
 
-###############################################################################
-# Load some categories from the training set
-if opts.all_categories:
-    categories = None
-else:
-    categories = [
-        'alt.atheism',
-        'talk.religion.misc',
-        'comp.graphics',
-        'sci.space',
-    ]
-
-if opts.filtered:
-    remove = ('headers', 'footers', 'quotes')
-else:
-    remove = ()
-
-print("Loading 20 newsgroups dataset for categories:")
-print(categories if categories else "all")
-
-data_train = fetch_20newsgroups(subset='train', categories=categories,
-                                shuffle=True, random_state=42,
-                                remove=remove)
-
-data_test = fetch_20newsgroups(subset='test', categories=categories,
-                               shuffle=True, random_state=42,
-                               remove=remove)
-print('data loaded')
-
-categories = data_train.target_names    # for case categories == None
+last_1k_articles = (
+    db_session
+    .query(Article)
+    .filter(or_(Article.last_action == 'like', Article.last_action == 'pass'))
+    .filter_by(user_id=1)
+    .order_by(Article.last_action_timestamp.desc())
+    .limit(1200)
+    .all()
+)
 
 
-def size_mb(docs):
-    return sum(len(s.encode('utf-8')) for s in docs) / 1e6
+def build_data_frame(article):
+    parsed_uri = urlparse(article.url)
+    domain = parsed_uri.netloc
+    return DataFrame({
+        "class": [article.last_action],
+        "origins": [article.origins],
+        "domain": [domain],
+        "title": [article.title],
+    }, index=[article])
 
-data_train_size_mb = size_mb(data_train.data)
-data_test_size_mb = size_mb(data_test.data)
+random.shuffle(last_1k_articles)
+train_size = len(last_1k_articles) * 5 / 10
+train_set = last_1k_articles[:train_size]
+test_set = last_1k_articles[train_size:]
 
-print("%d documents - %0.3fMB (training set)" % (
-    len(data_train.data), data_train_size_mb))
-print("%d documents - %0.3fMB (test set)" % (
-    len(data_test.data), data_test_size_mb))
-print("%d categories" % len(categories))
-print()
+data_train = DataFrame({'title': [], 'class': [], "origins": [], "domain": []})
+data_test = DataFrame({'title': [], 'class': [], "origins": [], "domain": []})
+for article in train_set:
+    data_train = data_train.append(build_data_frame(article))
+for article in test_set:
+    data_test = data_test.append(build_data_frame(article))
 
-# split a training set and a test set
-y_train, y_test = data_train.target, data_test.target
+data_train = data_train.reindex(np.random.permutation(data_train.index))
+data_test = data_test.reindex(np.random.permutation(data_test.index))
+
+y_train, y_test = data_train['class'], data_test['class']
 
 print("Extracting features from the training dataset using a sparse vectorizer")
-t0 = time()
-if opts.use_hashing:
+if use_hashing:
     vectorizer = HashingVectorizer(stop_words='english', non_negative=True,
-                                   n_features=opts.n_features)
-    X_train = vectorizer.transform(data_train.data)
+                                   n_features=n_features)
+    X_train = vectorizer.transform(np.asarray(data_train['title']))
 else:
     vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5,
                                  stop_words='english')
-    X_train = vectorizer.fit_transform(data_train.data)
-duration = time() - t0
-print("done in %fs at %0.3fMB/s" % (duration, data_train_size_mb / duration))
-print("n_samples: %d, n_features: %d" % X_train.shape)
-print()
+    X_train = vectorizer.fit_transform(np.asarray(data_train['title']))
 
 print("Extracting features from the test dataset using the same vectorizer")
-t0 = time()
-X_test = vectorizer.transform(data_test.data)
-duration = time() - t0
-print("done in %fs at %0.3fMB/s" % (duration, data_test_size_mb / duration))
-print("n_samples: %d, n_features: %d" % X_test.shape)
-print()
+X_test = vectorizer.transform(np.asarray(data_test['title']))
 
-if opts.select_chi2:
-    print("Extracting %d best features by a chi-squared test" %
-          opts.select_chi2)
+if select_chi2:
+    print("Extracting %d best features by a chi-squared test" % select_chi2)
     t0 = time()
-    ch2 = SelectKBest(chi2, k=opts.select_chi2)
+    ch2 = SelectKBest(chi2, k=select_chi2)
     X_train = ch2.fit_transform(X_train, y_train)
     X_test = ch2.transform(X_test)
-    print("done in %fs" % (time() - t0))
-    print()
-
-
-def trim(s):
-    """Trim string to fit on terminal (assuming 80-column display)"""
-    return s if len(s) <= 80 else s[:77] + "..."
-
 
 # mapping from integer feature name to original token string
-if opts.use_hashing:
+if use_hashing:
     feature_names = None
 else:
     feature_names = np.asarray(vectorizer.get_feature_names())
@@ -141,29 +130,26 @@ def benchmark(clf):
 
     score = metrics.f1_score(y_test, pred)
     print("f1-score:   %0.3f" % score)
+    # score = 0
 
     if hasattr(clf, 'coef_'):
         print("dimensionality: %d" % clf.coef_.shape[1])
         print("density: %f" % density(clf.coef_))
 
-        if opts.print_top10 and feature_names is not None:
+        if feature_names is not None:
             print("top 10 keywords per class:")
+            print(clf.coef_)
             for i, category in enumerate(categories):
                 top10 = np.argsort(clf.coef_[i])[-10:]
-                print(trim("%s: %s"
+                print(("%s: %s"
                       % (category, " ".join(feature_names[top10]))))
         print()
 
-    if opts.print_report:
+    if print_report:
         print("classification report:")
         print(metrics.classification_report(y_test, pred,
                                             target_names=categories))
 
-    if opts.print_cm:
-        print("confusion matrix:")
-        print(metrics.confusion_matrix(y_test, pred))
-
-    print()
     clf_descr = str(clf).split('(')[0]
     return clf_descr, score, train_time, test_time
 

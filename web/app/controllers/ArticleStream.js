@@ -96,7 +96,7 @@ ArticleStream.prototype.like = function(callback) {
 
 ArticleStream.prototype.dislike = function (callback) {
     console.assert(this.reading);
-    this.performActionOnCurrent('like', callback);
+    this.performActionOnCurrent('dislike', callback);
 };
 
 ArticleStream.prototype.load = function(callback) {
