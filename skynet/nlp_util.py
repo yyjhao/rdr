@@ -23,6 +23,27 @@ def to_terms(text):
     tokens = (word for sent in sent_tokenize(text) for word in word_tokenize(sent))
     return (stemmer.stem(lemmatizer.lemmatize(token)) for token in tokens if token not in exclude and len(token) > 2)
 
+
+def tokenizer(article):
+    terms = list(to_terms(unidecode(article.title)))
+    # bi = []
+    bi = ngrams(terms, 2, pad_left=True, pad_right=True)
+    for term in list(bi):
+    # for term in list(bi) + terms:
+        yield (term, 'title')
+    if article.summary and False:
+        terms = list(to_terms(BeautifulSoup(unidecode(article.summary)).get_text()))
+        bi = ngrams(terms, 2, pad_left=True, pad_right=True)
+        for term in list(bi) + terms:
+            # for term in terms:
+            yield (term, 'summary')
+    for origin in article.origins:
+        yield (origin.id, 'origin')
+    parsed_uri = urlparse(article.url)
+    domain = parsed_uri.netloc
+    yield (domain, 'domain')
+
+
 def gen_feature(article):
     features = {}
     terms = list(to_terms(unidecode(article.title)))

@@ -21,19 +21,23 @@ from sklearn.svm import LinearSVC
 from sklearn.linear_model import SGDClassifier
 from sklearn.linear_model import Perceptron
 from sklearn.linear_model import PassiveAggressiveClassifier
-from sklearn.naive_bayes import BernoulliNB, MultinomialNB
+from sklearn.naive_bayes import BernoulliNB, MultinomialNB, GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neighbors import NearestCentroid
 from sklearn.utils.extmath import density
+from sklearn.ensemble import BaggingClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neural_network import BernoulliRBM
 from sklearn import metrics
 
 from base.models import Article
 from base.database import db_session
 
+from skynet.nlp_util import tokenizer
+
 from pandas import DataFrame
 
 use_hashing = False
-select_chi2 = 0
 print_report = True
 n_features = 2 ** 16
 
@@ -53,7 +57,7 @@ last_1k_articles = (
     .filter(or_(Article.last_action == 'like', Article.last_action == 'pass'))
     .filter_by(user_id=1)
     .order_by(Article.last_action_timestamp.desc())
-    .limit(1200)
+    .limit(2000)
     .all()
 )
 
@@ -63,54 +67,52 @@ def build_data_frame(article):
     domain = parsed_uri.netloc
     return DataFrame({
         "class": [article.last_action],
-        "origins": [article.origins],
+        "origins": [[o.id for o in article.origins]],
         "domain": [domain],
         "title": [article.title],
-    }, index=[article])
+        "article": [article],
+    }, index=[article.id])
 
-random.shuffle(last_1k_articles)
-train_size = len(last_1k_articles) * 5 / 10
+
+def gen_data_frame(data_set):
+    result = DataFrame({'title': [], 'class': [], "domain": [], "origins": [], "article": []})
+    for article in data_set:
+        result = result.append(build_data_frame(article))
+
+    return result.reindex(np.random.permutation(result.index))
+
+# random.shuffle(last_1k_articles)
+train_size = len(last_1k_articles) * 7 / 10
 train_set = last_1k_articles[:train_size]
 test_set = last_1k_articles[train_size:]
 
-data_train = DataFrame({'title': [], 'class': [], "origins": [], "domain": []})
-data_test = DataFrame({'title': [], 'class': [], "origins": [], "domain": []})
-for article in train_set:
-    data_train = data_train.append(build_data_frame(article))
-for article in test_set:
-    data_test = data_test.append(build_data_frame(article))
-
-data_train = data_train.reindex(np.random.permutation(data_train.index))
-data_test = data_test.reindex(np.random.permutation(data_test.index))
+data_train = gen_data_frame(train_set)
+data_test = gen_data_frame(test_set)
 
 y_train, y_test = data_train['class'], data_test['class']
 
 print("Extracting features from the training dataset using a sparse vectorizer")
 if use_hashing:
     vectorizer = HashingVectorizer(stop_words='english', non_negative=True,
+                                   preprocessor=lambda x: x,
+                                   tokenizer=tokenizer,
                                    n_features=n_features)
-    X_train = vectorizer.transform(np.asarray(data_train['title']))
+    X_train = vectorizer.transform(data_train['article'])
 else:
     vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5,
+                                 preprocessor=lambda x: x,
+                                 tokenizer=tokenizer,
                                  stop_words='english')
-    X_train = vectorizer.fit_transform(np.asarray(data_train['title']))
+    X_train = vectorizer.fit_transform(data_train['article'])
 
 print("Extracting features from the test dataset using the same vectorizer")
-X_test = vectorizer.transform(np.asarray(data_test['title']))
-
-if select_chi2:
-    print("Extracting %d best features by a chi-squared test" % select_chi2)
-    t0 = time()
-    ch2 = SelectKBest(chi2, k=select_chi2)
-    X_train = ch2.fit_transform(X_train, y_train)
-    X_test = ch2.transform(X_test)
+X_test = vectorizer.transform(data_test['article'])
 
 # mapping from integer feature name to original token string
 if use_hashing:
     feature_names = None
 else:
     feature_names = np.asarray(vectorizer.get_feature_names())
-
 
 ###############################################################################
 # Benchmark classifiers
@@ -128,9 +130,15 @@ def benchmark(clf):
     test_time = time() - t0
     print("test time:  %0.3fs" % test_time)
 
-    score = metrics.f1_score(y_test, pred)
-    print("f1-score:   %0.3f" % score)
-    # score = 0
+    accuracy_score = metrics.accuracy_score(y_test, pred)
+    print("Accuracy: {0}".format(accuracy_score))
+
+    try:
+        score = metrics.f1_score(y_test, pred)
+        print("f1-score:   %0.3f" % score)
+    except:
+        print("Fuck!!!!!")
+        score = 0
 
     if hasattr(clf, 'coef_'):
         print("dimensionality: %d" % clf.coef_.shape[1])
@@ -138,11 +146,13 @@ def benchmark(clf):
 
         if feature_names is not None:
             print("top 10 keywords per class:")
-            print(clf.coef_)
-            for i, category in enumerate(categories):
-                top10 = np.argsort(clf.coef_[i])[-10:]
-                print(("%s: %s"
-                      % (category, " ".join(feature_names[top10]))))
+            try:
+                for i, category in enumerate(categories):
+                    top10 = np.argsort(clf.coef_[i])[-10:]
+                    print(("%s: %s"
+                          % (category, " ".join(feature_names[top10]))))
+            except:
+                print("FUuuuuu")
         print()
 
     if print_report:
@@ -151,7 +161,7 @@ def benchmark(clf):
                                             target_names=categories))
 
     clf_descr = str(clf).split('(')[0]
-    return clf_descr, score, train_time, test_time
+    return clf_descr, accuracy_score, train_time, test_time
 
 
 results = []
@@ -191,7 +201,6 @@ print('=' * 80)
 print("Naive Bayes")
 results.append(benchmark(MultinomialNB(alpha=.01)))
 results.append(benchmark(BernoulliNB(alpha=.01)))
-
 
 class L1LinearSVC(LinearSVC):
 
