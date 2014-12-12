@@ -28,14 +28,16 @@ def tokenizer(article):
     terms = list(to_terms(unidecode(article.title)))
     # bi = []
     bi = ngrams(terms, 2, pad_left=True, pad_right=True)
-    for term in list(bi):
-    # for term in list(bi) + terms:
+    # for term in list(bi):
+    # for term in terms:
+    for term in list(bi) + terms:
+        # for term in list(tri) + list(bi) + terms:
         yield (term, 'title')
-    if article.summary and False:
+    if article.summary:
         terms = list(to_terms(BeautifulSoup(unidecode(article.summary)).get_text()))
         bi = ngrams(terms, 2, pad_left=True, pad_right=True)
-        for term in list(bi) + terms:
-            # for term in terms:
+        # for term in list(bi) + terms:
+        for term in terms:
             yield (term, 'summary')
     for origin in article.origins:
         yield (origin.id, 'origin')

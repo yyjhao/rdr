@@ -1,86 +1,58 @@
 # -*- coding: utf-8 -*-
 
-from base.sources import TwitterSource, RssSource, WrappedSource
+from base.sources import TwitterSource, RssSource
 import base.config as config
 from base.database import db_session
-from base.models import Article, Origin, Source
+from base.util import ArticleProto
 from twitter import Twitter, OAuth
 import dateutil.parser as date_parser
-from skynet.scorer import Scorer
-import re
 import feedparser
 from time import mktime
 from datetime import datetime, timedelta
 from crawler.util import htmltruncate
-from crawler.url_util import normalize_url
 
-url_regex = re.compile(r'''(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))''')
-def remove_url(string):
-    return url_regex.sub('', string)
+from worker.tasks import ProcessArticleTask
+
+from bs4 import BeautifulSoup, Comment
+
 
 def truncate_html(html_string):
     if not html_string:
         return html_string
-    return htmltruncate(html_string, 1024, ellipsis='...')
+    soup = BeautifulSoup(html_string)
+    comments = soup.findAll(text=lambda text: isinstance(text, Comment))
+    [comment.extract() for comment in comments]
+    [i.extract() for i in soup.findAll("script")]
+    return htmltruncate(str(soup), 1024, ellipsis='...')
+
 
 class Crawler(object):
-    MAX_AGO = timedelta(days=2)
+    MAX_AGO = timedelta(days=14)
 
     def __init__(self, source):
         self.source = source
 
     def crawl(self):
-        # print 'crawl', self.source._source.token
-        self.now = datetime.now()
+        self.start_time = datetime.now()
         for entry in self.get_json_entries():
-            # print entry.get('link')
-            article = self.to_article(entry)
+            article = self.to_article_proto(entry)
             if article:
-                db_session.add(article)
-                try:
-                    db_session.commit()
-                except Exception as e:
-                    print e
-                    db_session.rollback()
+                ProcessArticleTask.init_with_article(article).add()
+        self.source.last_retrive = self.start_time
+        try:
+            db_session.commit()
+        except Exception as e:
+            db_session.rollback()
 
-    def to_article(self, json_entry):
+    def to_article_proto(self, json_entry):
         article = self.process(json_entry)
-        if not article:
+        if not self.source.should_add_article(article):
             return None
-        time_ago = self.now - article.timestamp
+        time_ago = self.start_time - article.timestamp
         if time_ago > self.MAX_AGO:
             return None
-        # print time_ago
-        if not article:
-            return None
 
-        article.url = normalize_url(article.url)
-
-        db_article = (
-            db_session
-            .query(Article)
-            .filter_by(url=article.url, user_id=article.user_id)
-            .first()
-        )
-        if db_article:
-            if not db_article.timestamp or db_article.timestamp < article.timestamp:
-                db_article.timestamp = article.timestamp.strftime('%Y-%m-%d %H:%M:%S')
-
-            if article.origins[0] not in db_article.origins:
-                db_article.origins.append(article.origins[0])
-        else:
-            db_article = article
-
-        return db_article
-
-    def get_or_create_origin(self, orig_id):
-        source_id = self.source.id
-        origin = db_session.query(Origin).filter_by(identifier=orig_id, source_id=source_id).first()
-        if not origin:
-            origin = Origin()
-            origin.identifier = orig_id
-            origin.source_id = source_id
-        return origin
+        return article
 
     def get_json_entries(self):
         raise NotImplementedError()
@@ -89,31 +61,11 @@ class Crawler(object):
         raise NotImplementedError()
 
     @staticmethod
-    def get_for(source):
-        t = source.get_type()
-        if t == 'twitter':
+    def get_crawler_for(source):
+        if isinstance(source, TwitterSource):
             return TwitterCrawler(source)
-        elif t == 'rss':
+        elif isinstance(source, RssSource):
             return RssCrawler(source)
-
-    @staticmethod
-    def crawl_for_source(source, score=True):
-        wrapped_source = WrappedSource.get_for(source)
-        crawler = Crawler.get_for(wrapped_source)
-        crawler.crawl()
-        if score:
-            try:
-                Scorer(source.user_id).score_new()    
-            except:
-                # lol
-                pass
-
-    @staticmethod
-    def crawl_for_user(user_id):
-        sources = db_session.query(Source).filter_by(user_id=user_id).all()
-        for s in sources:
-            Crawler.crawl_for_source(s, score=True)
-        Scorer(user_id).score_new()
 
 
 class TwitterCrawler(Crawler):
@@ -122,23 +74,30 @@ class TwitterCrawler(Crawler):
         assert isinstance(source, TwitterSource)
         super(TwitterCrawler, self).__init__(source)
 
+    def get_twitter_timeline(self, t, since_id=None, max_id=None, count=300):
+        results = []
+        try:
+            results = t.statuses.home_timeline(count=count, since_id=self.source.since_id)
+        except ValueError as e:
+            if count > 30:
+                results = self.get_twitter_timeline(t, since_id=since_id, max_id=max_id, count=count / 2)
+                results += self.get_twitter_timeline(t, since_id=since_id, max_id=results[-1]['id'], count=count / 2)
+            else:
+                results = t.statuses.home_timeline(count=count, since_id=self.source.since_id)
+
+        return results
+
     def get_json_entries(self):
         t = Twitter(
             auth=OAuth(self.source.token, self.source.token_secret,
                        config.TWITTER_KEY, config.TWITTER_SECRET)
         )
-        results = []
-        if self.source.since_id:
-            results = t.statuses.home_timeline(count=200, since_id=self.source.since_id)
-        else:
-            results = t.statuses.home_timeline(count=200)
-
+        results = self.get_twitter_timeline(t, self.source.since_id)
         if results:
             self.source.since_id = results[0]['id']
         return results
 
     def process(self, json_entry):
-        article = Article()
         urls = json_entry['entities']['urls']
         if not len(urls):
             return None
@@ -149,17 +108,17 @@ class TwitterCrawler(Crawler):
         if not url:
             return None
 
-        article.user_id = self.source.user_id
-        article.url = url
-        article.title = remove_url(json_entry['text'])
-        article.timestamp = date_parser.parse(json_entry['created_at']).replace(tzinfo=None)
-        orig_id = json_entry['user']['id_str']
-        origin = self.get_or_create_origin(orig_id)
-        origin.image_url = json_entry['user']['profile_image_url']
-        origin.display_name = json_entry['user']['name']
-        article.origins.append(origin)
+        return ArticleProto(
+            url=url,
+            title=json_entry['text'],
+            timestamp=date_parser.parse(json_entry['created_at']).replace(tzinfo=None),
+            origin='twitter:' + json_entry['user']['id_str'],
+            origin_img=json_entry['user']['profile_image_url'],
+            origin_display_name=json_entry['user']['name'],
+            source_id=self.source.id,
+            summary=None,
+        )
 
-        return article
 
 class RssCrawler(Crawler):
 
@@ -171,9 +130,11 @@ class RssCrawler(Crawler):
         last = self.source.last_modified_indicator
         feed = None
         self.image = None
-        if 'etag' in last:
+        # if self.source.url in ("http://golem.ph.utexas.edu/category/atom10.xml", "http://www.chromi.org/feed"):
+        #     return []
+        if last and ('etag' in last):
             feed = feedparser.parse(self.source.url, etag=last['etag'])
-        elif 'modified' in last:
+        elif last and ('modified' in last):
             feed = feedparser.parse(self.source.url, modified=last['modified'])
         else:
             feed = feedparser.parse(self.source.url)
@@ -191,26 +152,22 @@ class RssCrawler(Crawler):
         return feed.entries
 
     def process(self, json_entry):
-        article = Article()
-        url = json_entry.get('feedburner_origlink')
-        if not url:
-            url = json_entry.get('link')
-
-        article.user_id = self.source.user_id
-        article.url = url
-        article.title = json_entry.get('title')
+        url = json_entry.get('feedburner_origlink') or json_entry.get('link')
         parsed_time = json_entry.get('published_parsed') or json_entry.get('updated_parsed')
+        timestamp = None
         if parsed_time:
-            article.timestamp = datetime.fromtimestamp(mktime(parsed_time))
+            timestamp = datetime.fromtimestamp(mktime(parsed_time))
         else:
-            print 'no time for', self.source.url
-            article.timestamp = datetime.now()
-        article.summary = truncate_html(json_entry.get('summary'))
+            timestamp = self.start_time
 
-        orig_id = str(self.source.id) + '-' + json_entry.get('author', '')
-        origin = self.get_or_create_origin(orig_id)
-        origin.image_url = self.image
-        origin.display_name = json_entry.get('author', self.source.name)
-        article.origins.append(origin)
-
-        return article
+        return ArticleProto(
+            url=url,
+            title=json_entry.get('title'),
+            timestamp=timestamp,
+            summary=truncate_html(json_entry.get('summary')),
+            origin=str(self.source.id) + ':' + json_entry.get('author', ''),
+            origin_img=self.image,
+            origin_display_name=json_entry.get('author', self.source.name),
+            image_url=None,
+            source_id=self.source.id,
+        )

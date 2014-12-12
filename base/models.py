@@ -1,108 +1,92 @@
-from sqlalchemy import Column, ForeignKey, Table, Index
+from sqlalchemy import Column, ForeignKey, Index, Table
 from sqlalchemy import Integer, String, DateTime, UniqueConstraint, Text
-from sqlalchemy.dialects.mysql import LONGBLOB
+from sqlalchemy.orm import relationship
+from sqlalchemy.dialects.postgresql import \
+    ARRAY, BIGINT, BIT, BOOLEAN, BYTEA, CHAR, CIDR, DATE, \
+    DOUBLE_PRECISION, ENUM, FLOAT, HSTORE, INET, INTEGER, \
+    INTERVAL, JSON, MACADDR, NUMERIC, REAL, SMALLINT, TEXT, \
+    TIME, TIMESTAMP, UUID, VARCHAR, INT4RANGE, INT8RANGE, NUMRANGE, \
+    DATERANGE, TSRANGE, TSTZRANGE, TSVECTOR
 from base.database import Base
-from sqlalchemy.orm import relationship, backref
+
+
+user_source = Table('user_source', Base.metadata,
+    Column('user_id', Integer, ForeignKey('user.id')),
+    Column('source.id', Integer, ForeignKey('source.id'))
+)
+
 
 class User(Base):
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(1024))
-    ext_uid = Column(String(255), index=True)
-    auth_token = Column(String(255))
-    email = Column(String(255))
+    info = Column(JSON)
+    email = Column(String(255), index=True, unique=True)
 
-    def is_authenticated(self):
-        return True
+    sources = relationship('Source', secondary=user_source)
 
-    @property
-    def serialize(self):
-       return {
-           'name': self.name,
-           'email': self.email,
-       }
 
 class UserClassifier(Base):
     __tablename__ = 'user_classifier'
 
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'), index=True, unique=True)
-    classifier = Column(LONGBLOB, nullable=False)
+    classifier = Column(BYTEA, nullable=False)
     locked = Column(DateTime, nullable=True)
 
-article_origin_table = Table('article_origin', Base.metadata,
-    Column('artcile_id', Integer, ForeignKey('article.id')),
-    Column('origin_id', Integer, ForeignKey('origin.id'))
-)
+
+class UserUrl(Base):
+    __tablename__ = 'user_url'
+    __table_args__ = (Index('user_url_index', "user_id", "url_id"), )
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'), index=True)
+    url_id = Column(Integer, ForeignKey('url.id'), index=True)
+    score = Column(Integer, index=True)
+    last_action = Column(Integer, index=True)
+    articles = Column(ARRAY(Integer), nullable=False)
+
+
+class Url(Base):
+    __tablename__ = 'url'
+
+    id = Column(Integer, primary_key=True)
+    url = Column(String(512), unique=True, index=True)
+
 
 class Source(Base):
     __tablename__ = 'source'
 
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('user.id'), index=True)
-    token = Column(String(512), nullable=False)
+    info = Column(JSON, nullable=False)
     type = Column(String(255), nullable=False)
-    last_indicator = Column(String(255), nullable=True)
-    name = Column(String(512), nullable=False)
-    last_fail = Column(DateTime, nullable=True)
-    ext_uid = Column(String(255), index=True, nullable=True)
+    ext_uid = Column(String(512), index=True, nullable=False, unique=True)
+    last_retrive = Column(DateTime, nullable=True)
+    is_private = Column(BOOLEAN, nullable=False)
 
-    user = relationship("User", backref=backref('sources', order_by=id))
-
-    @property
-    def serialize(self):
-       return {
-           'id': self.id,
-           'name': self.name,
-           'type': self.type
-       }
 
 class Origin(Base):
     __tablename__ = 'origin'
-    __table_args__ = (Index('orign_index', "identifier", "source_id"), )
 
     id = Column(Integer, primary_key=True)
-    identifier = Column(String(255), nullable=False, index=True)
-    source_id = Column(Integer, nullable=False, index=True)
+    identifier = Column(String(255), nullable=False, index=True, unique=True)
     display_name = Column(String(255), nullable=False)
     image_url = Column(String(255), nullable=True)
 
-    @property
-    def serialize(self):
-        return {
-            'display_name': self.display_name,
-            'image_url': self.image_url,
-        }
 
 class Article(Base):
     __tablename__ = 'article'
-    __table_args__ = (
-        UniqueConstraint('url', 'user_id', name='user_url'),
-    )
 
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('user.id'), index=True)
     title = Column(String(512), nullable=False)
     summary = Column(Text, nullable=True)
-    url = Column(String(255), nullable=False, index=True)
+    url_id = Column(Integer, ForeignKey('url.id'))
     timestamp = Column(DateTime, nullable=False, index=True)
-    score = Column(Integer, index=True)
-    origins = relationship('Origin', secondary=article_origin_table)
-    last_action = Column(String(255), nullable=True, index=True)
-    last_action_timestamp = Column(DateTime, nullable=True)
+    origin_id = Column(Integer, ForeignKey('origin.id'))
     image_url = Column(String(512), nullable=True)
+    source_id = Column(Integer, ForeignKey('source.id'))
 
-    @property
-    def serialize(self):
-        return {
-            'title': self.title,
-            'summary': self.summary,
-            'url': self.url,
-            'image_url': self.image_url,
-            'id': self.id,
-            'last_action_timestamp': self.last_action_timestamp,
-            'origins': [o.serialize for o in self.origins]
-        }
+    origin = relationship('Origin')
+    url = relationship('Url')
 
 ALL_ACTIONS = ['like', 'dislike', 'pass', 'defer']

@@ -3,6 +3,7 @@ from base.database import db_session
 
 from skynet.nlp_util import gen_feature
 from skynet.config import SCORE_DICT
+from skynet.classifiers import NaiveBayesClassifier, SVMClassifier
 
 import nltk
 
@@ -12,33 +13,36 @@ class Learner():
     def __init__(self, user_id):
         self.user_id = user_id
 
-    def learn(self):
-        last_1k_articles = (
+
+    def get_articles(self, article_type, num):
+        return (
             db_session
             .query(Article)
-            .filter(Article.last_action != None)
-            .filter_by(user_id=self.user_id)
+            .filter_by(user_id=self.user_id, last_action=article_type)
             .order_by(Article.last_action_timestamp.desc())
-            .limit(1250)
+            .limit(num)
             .all()
         )
 
-        if not last_1k_articles:
+    def learn(self):
+        total_num = 2000
+
+        training_articles = []
+        for t in ('like', 'dislike', 'defer', 'pass'):
+            training_articles += self.get_articles(t, int(total_num / 4) if t != 'pass' else (total_num - len(training_articles)))
+
+        if not training_articles:
             return
 
-        article_features = [
-            (gen_feature(a), a.last_action) for a in last_1k_articles
-        ]
-
-        classifier = nltk.NaiveBayesClassifier.train(article_features)
+        classifier = SVMClassifier()
+        # classifier = NaiveBayesClassifier()
+        classifier.train(training_articles)
 
         store = db_session.query(UserClassifier).filter_by(user_id=self.user_id).first()
         if not store:
             store = UserClassifier()
             store.user_id = self.user_id
 
-        store.classifier = cPickle.dumps(classifier)
+        store.classifier = classifier.dumps()
         db_session.add(store)
 
-    def gen_priorscore(self, article):
-        return SCORE_DICT[article.last_action]

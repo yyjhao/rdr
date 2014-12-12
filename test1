@@ -1,0 +1,34 @@
+Extracting features from the training dataset using a sparse vectorizer
+Extracting features from the test dataset using the same vectorizer
+Extracting 100 best features by a chi-squared test
+================================================================================
+Perceptron
+________________________________________________________________________________
+Training: 
+Perceptron(alpha=0.0001, class_weight=None, eta0=1.0, fit_intercept=True,
+      n_iter=50, n_jobs=1, penalty=None, random_state=0, shuffle=False,
+      verbose=0, warm_start=False)
+train time: 0.003s
+test time:  0.000s
+f1-score:   0.776
+dimensionality: 100
+density: 0.596667
+
+classification report:
+             precision    recall  f1-score   support
+
+       like       0.00      0.00      0.00         0
+    dislike       0.22      0.13      0.17        30
+      defer       0.86      0.91      0.88       170
+
+avg / total       0.76      0.80      0.78       200
+
+================================================================================
+Passive-Aggressive
+________________________________________________________________________________
+Training: 
+PassiveAggressiveClassifier(C=1.0, fit_intercept=True, loss='hinge',
+              n_iter=50, n_jobs=1, random_state=None, shuffle=False,
+              verbose=0, warm_start=False)
+train time: 0.002s
+test time:  0.000s

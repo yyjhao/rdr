@@ -63,9 +63,7 @@ ArticleStream.prototype.read = function(callback) {
 };
 
 ArticleStream.prototype._next = function(callback) {
-    if (this.dataStore.length) {
-        this.dataStore.shift();
-    }
+    console.log("_next", this.dataStore.length);
     if (this.dataStore.length) {
         callback();
     } else {
@@ -83,11 +81,21 @@ ArticleStream.prototype.performActionOnCurrent = function(action, callback) {
         article_id: this.getCurrent().id,
         action: action
     });
-    this.worker.done(function() {
+    var removed = this.getCurrent();
+    if (this.dataStore.length) {
+        this.dataStore.shift();
+    }
+    console.log(action, 'requesting');
+    this.worker.then(function() {
+        console.log(action, this.dataStore);
         this.worker = null;
         this._next(callback);
+    }.bind(this), function() {
+        console.log(action, 'fail');
+        this.worker = null;
     }.bind(this));
-}
+    return removed;
+};
 
 ArticleStream.prototype.like = function(callback) {
     console.assert(this.reading);
@@ -102,23 +110,24 @@ ArticleStream.prototype.dislike = function (callback) {
 ArticleStream.prototype.load = function(callback) {
     if (!this.loader) {
         this.loader = this.apiClient.get(router.getReq(), '/article');
-        this.loader.done(function(res) {
+        this.loader.then(function(res) {
             [].push.apply(this.dataStore, res.body.articles);
             console.log(res.body.articles)
             this.loader = null;
             callback && callback();
+        }.bind(this), function() {
+            this.loader = null;
         }.bind(this));
     }
 };
 
 ArticleStream.prototype.pass = function(callback) {
-    this._lastPassed = this.getCurrent();
-    this.performActionOnCurrent('pass', callback);
+    this._lastPassed = this.performActionOnCurrent('pass', callback) || this._lastPassed;
+    console.log("last passed", this._lastPassed);
 };
 
 ArticleStream.prototype.defer = function(callback) {
-    this._lastDeferred = this.getCurrent();
-    this.performActionOnCurrent('defer', callback);
+    this._lastDeferred = this.performActionOnCurrent('defer', callback) || this._lastDeferred;
 };
 
 ArticleStream.prototype.getLastPassed = function() {

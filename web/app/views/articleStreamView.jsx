@@ -31,7 +31,7 @@ module.exports = React.createClass({
       <div className={"article-card " + type} key={article.id}>
         <div className="card-content">
           <header className="card-title" dangerouslySetInnerHTML={{__html: article.title}} />
-          { article.summary ?
+          { article.summary?
             <div className="summary" dangerouslySetInnerHTML={{__html: article.summary}} /> :
             <div className="empty-summary">No summary...</div>
           }

@@ -1,31 +1,47 @@
 from twitter import Twitter, OAuth
 import json
 import feedparser
+from sqlalchemy.exc import IntegrityError
 
-from base.models import Source
+from base.models import Source, user_source
 from base.database import db_session
 import base.config as config
+
 
 class WrappedSource(object):
 
     def __init__(self, db_entry):
-        assert db_entry.type == self.get_type()
         self._source = db_entry
         super(WrappedSource, self).__init__()
 
     @staticmethod
-    def get_for(model):
-        if model.type == 'twitter':
-            return TwitterSource(model)
-        elif model.type == 'rss':
-            return RssSource(model)
+    def init_with_entry(entry):
+        if entry.type == 'twitter':
+            return TwitterSource(entry)
+        elif entry.type == 'rss':
+            return RssSource(entry)
+
+    @classmethod
+    def get_or_create(cls, source):
+        db_session.add(source)
+        try:
+            db_session.commit()
+            return cls(source)
+        except IntegrityError as e:
+            db_session.rollback()
+            return cls(
+                db_session
+                .query(Source)
+                .filter_by(ext_uid=source.ext_uid, type=cls.get_type())
+                .first()
+            )
 
     @classmethod
     def get_type(cls):
         raise NotImplementedError()
 
     @classmethod
-    def create_or_update(cls, user, token):
+    def create_or_update(cls, *args):
         raise NotImplementedError()
 
     @property
@@ -36,14 +52,22 @@ class WrappedSource(object):
     def id(self):
         return self._source.id
 
-    @property
-    def name(self):
-        return self._source.name
+    def should_add_article(self, article):
+        if not article:
+            return False
+        if not self._source.last_retrive:
+            return True
+        return self._source.last_retrive < article.timestamp
+
+    def add_to_user(self, user):
+        db_session.execute(user_source.insert(), user_id=user.id, source_id=self.id)
+
 
 class TwitterSource(WrappedSource):
 
     def __init__(self, db_entry):
-        self.token, self.token_secret = json.loads(db_entry.token)
+        self.token = db_entry.info['token']
+        self.token_secret = db_entry.info['token_secret']
         super(TwitterSource, self).__init__(db_entry)
 
     @classmethod
@@ -51,34 +75,34 @@ class TwitterSource(WrappedSource):
         return 'twitter'
 
     @classmethod
-    def create_or_update(cls, user, token_json):
-        token, token_secret = json.loads(token_json)
+    def create_or_update(cls, token, token_secret):
         t = Twitter(
             auth=OAuth(token, token_secret,
                        config.TWITTER_KEY, config.TWITTER_SECRET)
         )
         info = t.account.verify_credentials()
-        source = db_session.query(Source).filter_by(ext_uid=info[u'id_str'], user_id=user.id, type='twitter').first()
+        source = db_session.query(Source).filter_by(ext_uid=info[u'id_str'], type='twitter').first()
         if not source:
             source = Source()
             source.ext_uid = info['id_str']
-            source.user_id = user.id
-        source.name = info[u'screen_name']
-        source.token = token_json
+            source.is_private = True
+        source.info = {}
+        source.info['name'] = info[u'screen_name']
+        source.info['token'] = token
+        source.info['token_secret'] = token_secret
         source.type = 'twitter'
-        db_session.add(source)
-        db_session.commit()
-        return source
+        
+        return cls.get_or_create(source)
 
     @property
     def since_id(self):
-        return self._source.last_indicator
+        return self._source.info['since_id']
 
     @since_id.setter
     def since_id(self, value):
-        self._source.last_indicator = str(value)
+        self._source.info['since_id'] = value
         db_session.add(self._source)
-        db_session.commit()
+
 
 class RssSource(WrappedSource):
 
@@ -90,35 +114,42 @@ class RssSource(WrappedSource):
         return 'rss'
 
     @classmethod
-    def create_or_update(cls, user, token):
-        source = db_session.query(Source).filter_by(token=token, user_id=user.id, type='rss').first()
+    def create_or_update(cls, url):
+        source = (
+            db_session
+            .query(Source)
+            .filter_by(ext_uid=url, type='rss')
+            .first()
+        )
         if not source:
-            d = feedparser.parse(token)
+            d = feedparser.parse(url)
             if not d.feed or not d.feed.get('title'):
                 return None
             source = Source()
-            source.token = token
+            source.ext_uid = url
+            source.is_private = False
+            source.info = {}
+            source.info['url'] = url
+            source.info['name'] = d.feed.title
             source.type = 'rss'
-            source.name = d.feed.title
-            source.user_id = user.id
-            db_session.add(source)
-            db_session.commit()
-        return source
+            return cls.get_or_create(source)
+        return cls(source)
+        
 
     @property
     def last_modified_indicator(self):
-        if self._source.last_indicator:
-            return json.loads(self._source.last_indicator)
-        else:
-            return {}
+        return self._source.info.get('last_modified_indicator')
 
     @last_modified_indicator.setter
     def last_modified_indicator(self, value):
-        self._source.last_indicator = json.dumps(value)
+        self._source.last_indicator = value
         db_session.add(self._source)
-        db_session.commit()
 
     @property
     def url(self):
-        return self._source.token
-    
+        return self._source.info['url']
+
+    @property
+    def name(self):
+        return self._source.info['name']
+

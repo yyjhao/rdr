@@ -17,15 +17,25 @@ ArticleList.prototype.getCurrent = function() {
 };
 
 ArticleList.prototype.setCurrent = function(val, callback) {
-    this.active_idx = this.dataStore.indexOf(val);
-    this.active = val;
+    if (!this.dataStore.length) {
+        this.active_idx = -1;
+        this.active = val;
+    } else {
+        this.active_idx = this.dataStore.indexOf(val);
+        this.active = val;
+    }
 
-    this.apiClient.get(router.getReq(), '/iframe_ok', {
-        url: this.getCurrent().url
-    }, function(res) {
-        this.canRead = res.body.iframe_ok;
+    if (this.getCurrent()) {
+        this.apiClient.get(router.getReq(), '/iframe_ok', {
+            url: this.getCurrent().url
+        }, function(res) {
+            this.canRead = res.body.iframe_ok;
+            callback && callback();
+        }.bind(this));
+    } else {
+        this.canRead = true;
         callback && callback();
-    }.bind(this));
+    }
 }
 
 ArticleList.prototype._next = function(callback) {

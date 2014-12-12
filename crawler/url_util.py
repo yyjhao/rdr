@@ -3,6 +3,18 @@ import httplib
 from urllib import urlencode
 from urlparse import urlparse, urlunparse, parse_qs, urljoin
 
+REMOVABLE_QUERIES = set([
+    'utm_content',
+    'utm_medium',
+    'utm_source',
+    'utm_campaign',
+    'showComment',
+    'ncid',
+    'ocid',
+    'feedType',
+    'feedName',
+])
+
 
 def remove_redundant_queries(url):
     url_obj = urlparse(url)
@@ -11,11 +23,7 @@ def remove_redundant_queries(url):
     new_query = {
         k: v
         for k, v in query.items()
-        if (
-            'feed' not in k.lower() and
-            'rss' not in k.lower() and
-            (not v or len(v) > 1 or 'rss' not in v[0].lower())
-        )
+        if k not in REMOVABLE_QUERIES
     }
 
     return urlunparse(url_obj._replace(query=urlencode(new_query, True)))
@@ -55,5 +63,5 @@ def unshorten_url(url):
         return urlunparse(new_url)
     else:
         if response.status != 200:
-            print response.status, 'failed!'
+            print response.status, 'failed!', url
         return url
