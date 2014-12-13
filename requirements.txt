@@ -11,3 +11,4 @@ beautifulsoup4==4.3.2
 urlnorm==1.1.2
 unidecode==0.04.16
 python-dateutil==2.3
+redis==2.10.3

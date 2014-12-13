@@ -6,6 +6,8 @@ from base.database import db_session
 from base.models import Article, Origin, Url
 from crawler.url_util import normalize_url
 
+from base.exceptions import DuplicateEntryException
+
 
 def process(article_proto):
     article_proto.url = normalize_url(article_proto.url)
@@ -27,8 +29,19 @@ def update_relation(article, article_proto):
     origin.display_name = article_proto.origin_display_name
 
     url_row = get_or_create_url(article_proto.url)
+
     article.url = url_row
     article.origin = origin
+
+    # TODO: this doesn't guarantee no duplicate but the chance should be low for now
+    if article_proto.time_unkown and origin.id and url_row.id:
+        if (
+            db_session
+            .query(Article)
+            .filter_by(url_id=url_row.id, origin_id=origin.id)
+            .count()):
+                raise DuplicateEntryException("article is duplicated: " + str(article_proto))
+
 
 
 def process_and_add(article_proto):

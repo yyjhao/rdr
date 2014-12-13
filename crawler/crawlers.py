@@ -10,8 +10,9 @@ import feedparser
 from time import mktime
 from datetime import datetime, timedelta
 from crawler.util import htmltruncate
+from crawler.article_processor import process_and_add
 
-from worker.tasks import ProcessArticleTask
+from worker.task_queue import get_queue
 
 from bs4 import BeautifulSoup, Comment
 
@@ -37,7 +38,7 @@ class Crawler(object):
         for entry in self.get_json_entries():
             article = self.to_article_proto(entry)
             if article:
-                ProcessArticleTask.init_with_article(article).add()
+                get_queue().add_task(process_and_add, (article))
         self.source.last_retrive = self.start_time
         try:
             db_session.commit()
@@ -117,6 +118,7 @@ class TwitterCrawler(Crawler):
             origin_display_name=json_entry['user']['name'],
             source_id=self.source.id,
             summary=None,
+            time_unknown=False,
         )
 
 
@@ -155,9 +157,11 @@ class RssCrawler(Crawler):
         url = json_entry.get('feedburner_origlink') or json_entry.get('link')
         parsed_time = json_entry.get('published_parsed') or json_entry.get('updated_parsed')
         timestamp = None
+        time_unknown = False
         if parsed_time:
             timestamp = datetime.fromtimestamp(mktime(parsed_time))
         else:
+            time_unknown = True
             timestamp = self.start_time
 
         return ArticleProto(
@@ -170,4 +174,5 @@ class RssCrawler(Crawler):
             origin_display_name=json_entry.get('author', self.source.name),
             image_url=None,
             source_id=self.source.id,
+            time_unknown=time_unknown,
         )
