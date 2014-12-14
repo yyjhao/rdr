@@ -38,7 +38,7 @@ class Crawler(object):
         for entry in self.get_json_entries():
             article = self.to_article_proto(entry)
             if article:
-                get_queue().add_task(process_and_add, (article))
+                get_queue().add_task(process_and_add, (article,), queue='article_processor')
         self.source.last_retrive = self.start_time
         try:
             db_session.commit()

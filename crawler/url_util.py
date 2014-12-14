@@ -1,7 +1,9 @@
-import urlnorm
-import httplib
-from urllib import urlencode
-from urlparse import urlparse, urlunparse, parse_qs, urljoin
+import traceback
+
+import crawler.urlnorm as urlnorm
+import http.client
+from urllib.parse import urlencode
+from urllib.parse import urlparse, urlunparse, parse_qs, urljoin
 
 REMOVABLE_QUERIES = set([
     'utm_content',
@@ -22,7 +24,7 @@ def remove_redundant_queries(url):
 
     new_query = {
         k: v
-        for k, v in query.items()
+        for k, v in list(query.items())
         if k not in REMOVABLE_QUERIES
     }
 
@@ -31,9 +33,10 @@ def remove_redundant_queries(url):
 
 def normalize_url(url):
     try:
-        return urlnorm.norm(remove_redundant_queries(unshorten_url(url)))
+        return urlnorm.norms(remove_redundant_queries(unshorten_url(url)))
     except Exception as e:
-        print 'fail to normalize url', url, e
+        print('fail to normalize url', url, e)
+        print(traceback.format_exc())
         return url
 
 
@@ -41,9 +44,9 @@ def unshorten_url(url):
     url_idna = url.encode('UTF-8')
     parsed = urlparse(url_idna)
     if parsed.scheme == 'http':
-        h = httplib.HTTPConnection(parsed.netloc)
+        h = http.client.HTTPConnection(parsed.netloc)
     elif parsed.scheme == 'https':
-        h = httplib.HTTPSConnection(parsed.netloc)
+        h = http.client.HTTPSConnection(parsed.netloc)
     else:
         return url
     h.request('HEAD', url_idna)
@@ -63,5 +66,5 @@ def unshorten_url(url):
         return urlunparse(new_url)
     else:
         if response.status != 200:
-            print response.status, 'failed!', url
+            print(response.status, 'failed!', url)
         return url

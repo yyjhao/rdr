@@ -1,85 +1,115 @@
 from redis import StrictRedis
-import time
-import json
+import pickle
 import importlib
+import hashlib
+import time
 
-
-def now_in_ms():
-    return int(round(time.time() * 1000))
+from base.exceptions import DuplicatedEntryException
 
 _queue = None
+
 
 class _TaskQueue(object):
     def __init__(self):
         self._redis = StrictRedis()
 
-        # keys: task id counter name, task hashmap name, task string,
-        # queue name, delay until (in ms), timeout hashmap name, timeout time
         self._adder = self._redis.register_script('''
-            local tid = redis.call('INCR', KEYS[1]);
-            redis.call('HSET', KEYS[2], tid, KEYS[3])
-            redis.call('ZADD', KEYS[4], KEYS[5], tid)
-            redis.call('HSET', KEYS[6], tid, KEYS[7])
-            return tid
+            local hash = KEYS[1]
+            local task = KEYS[2]
+            local queue = KEYS[3]
+            local timeout = KEYS[4]
+            local delay = KEYS[5]
+            local now = KEYS[6]
+            local renew = KEYS[7]
+
+            if redis.call('HEXISTS', queue .. "_map", hash) == 1 then
+                if renew then
+                    redis.call('HSET', queue .. "_renew", hash, delay)
+                else
+                    return 'duplicated'
+                end
+            else
+                redis.call('HSET', queue .. "_map", hash, task)
+                redis.call('ZADD', queue .. "_queue", delay + now, hash)
+                redis.call('HSET', queue .. "_timeout", hash, timeout)
+                return 1
+            end
         ''')
 
-        # keys: queue name, current timestamp (in ms), done hashmap name
-        # task hashmap name, timeout map name
         self._popper = self._redis.register_script('''
+            local queue = KEYS[1]
+            local now = KEYS[2]
             while 1 do
-                local tids = redis.call('ZRANGEBYSCORE', KEYS[1], 0, KEYS[2], 'limit', 0, 1)
-                if table.getn(tids) == 0 then
+                local hashes = redis.call('ZRANGEBYSCORE', queue .. "_queue", 0, now, 'limit', 0, 1)
+                if table.getn(hashes) == 0 then
                     return nil
-                elseif redis.call('HEXISTS', KEYS[3], tids[1]) == 1 then
-                    redis.call('ZREM', KEYS[1], tids[1])
-                    redis.call('HDEL', KEYS[3], tids[1])
-                    redis.call('HDEL', KEYS[4], tids[1])
-                    redis.call('HDEL', KEYS[5], tids[1])
+                elseif redis.call('HEXISTS', queue .. "_map", hashes[1]) == 0 then
+                    redis.call('ZREM', queue .. "_queue", hashes[1])
+                    redis.call('HDEL', queue .. "_timeout", hashes[1])
                 else
-                    redis.call('ZINCRBY', KEYS[1], redis.call('HGET', KEYS[5], tids[1]), tids[1])
-                    return {redis.call('HGET', KEYS[4], tids[1]), tids[1]}
+                    redis.call('ZADD', queue .. "_queue", redis.call('HGET', queue .. "_timeout", hashes[1]) + now, hashes[1])
+                    return {redis.call('HGET', queue .. "_map", hashes[1]), hashes[1]}
                 end
             end
         ''')
+
+        self._completer = self._redis.register_script('''
+            local hash = KEYS[1]
+            local queue = KEYS[2]
+            local now = KEYS[3]
+            if redis.call('HEXISTS', queue .. "_renew", hash) == 1 then
+                redis.call('ZADD', queue .. "_queue", now + redis.call('HGET', queue .. "_renew", hash), hash)
+                redis.call('HDEL', queue .. "_renew", hash)
+            else
+                redis.call('ZREM', queue .. "_queue", hash)
+                redis.call('HDEL', queue .. "_map", hash)
+                redis.call('HDEL', queue .. "_timeout", hash)
+            end
+        ''')
+
         super(_TaskQueue, self).__init__()
 
-    def add_task(self, func, args, queue="default", timeout=300000):
-        self._adder(keys=[
-            queue + '_counter',
-            queue + '_tasks',
+    def add_task(self, func, args, queue="default", timeout=300, delay=0, renew=False):
+        string = self._serialize(func, args)
+        sha1 = hashlib.sha1(string).hexdigest()
+        adder = self._adder
+        result = adder(keys=[
+            sha1,
             self._serialize(func, args),
-            queue + '_queue',
-            now_in_ms(),
-            queue + '_timeout',
+            queue,
             timeout,
-        ], args=[])
+            delay,
+            int(time.time()),
+            renew,
+        ])
+
+        if result != 1:
+            if result == b'duplicated':
+                raise DuplicatedEntryException()
 
     def _serialize(self, func, args):
-        return json.dumps([
+        return pickle.dumps([
             func.__module__,
             func.__name__,
             args,
         ])
 
     def _deserialize(self, string):
-        module, func, args = json.loads(string.decode("utf-8"))
+        module, func, args = pickle.loads(string)
         lib = importlib.import_module(module)
         return getattr(lib, func), args
 
     def pop_and_execute(self, queue="default"):
-        result = self._popper(keys=[
-            queue + '_queue',
-            now_in_ms(),
-            queue + '_done',
-            queue + '_tasks',
-            queue + '_timeout',
-        ])
+        result = self._popper(keys=[queue, int(time.time())])
 
         if result:
             task, tid = result
             func, args = self._deserialize(task)
-            func(*args)
             self._redis.hset(queue + '_done', tid, 1)
+            self._completer(keys=[tid, queue, int(time.time())])
+            return True
+        else:
+            return False
 
 
 def get_queue():

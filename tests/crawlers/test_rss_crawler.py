@@ -5,4 +5,4 @@ from base.sources import WrappedSource, RssSource
 
 source = RssSource.create_or_update('http://feeds.feedburner.com/Techcrunch')
 
-Crawler.get_crawler_for(source).crawl()
+# Crawler.get_crawler_for(source).crawl()

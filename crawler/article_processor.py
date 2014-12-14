@@ -4,13 +4,14 @@ from sqlalchemy.exc import IntegrityError
 
 from base.database import db_session
 from base.models import Article, Origin, Url
+from base.util import ArticleProto
 from crawler.url_util import normalize_url
 
-from base.exceptions import DuplicateEntryException
+from base.exceptions import DuplicatedEntryException
 
 
 def process(article_proto):
-    article_proto.url = normalize_url(article_proto.url)
+    return article_proto._replace(url=normalize_url(article_proto.url))
 
 
 def to_db_entry(article_proto):
@@ -34,21 +35,27 @@ def update_relation(article, article_proto):
     article.origin = origin
 
     # TODO: this doesn't guarantee no duplicate but the chance should be low for now
-    if article_proto.time_unkown and origin.id and url_row.id:
+    if origin.id and url_row.id:
         if (
             db_session
             .query(Article)
             .filter_by(url_id=url_row.id, origin_id=origin.id)
-            .count()):
-                raise DuplicateEntryException("article is duplicated: " + str(article_proto))
+            .first().title == article.title):
+                raise DuplicatedEntryException("article is duplicated: " + str(article_proto))
 
+
+def process_and_add_wrap(article_dict):
+    process_and_add(ArticleProto(**article_dict))
 
 
 def process_and_add(article_proto):
-    process(article_proto)
+    article_proto = process(article_proto)
     article = to_db_entry(article_proto)
 
-    update_relation(article, article_proto)
+    try:
+        update_relation(article, article_proto)
+    except DuplicatedEntryException as e:
+        return
     db_session.add(article)
 
     # shouldn't need to update the relation for more than 3 times
@@ -59,7 +66,10 @@ def process_and_add(article_proto):
             return
         except IntegrityError as e:
             db_session.rollback()
-            update_relation(article, article_proto)
+            try:
+                update_relation(article, article_proto)
+            except DuplicatedEntryException as e:
+                return
             db_session.add(article)
 
     raise Exception("Failed to add article_proto: " + str(article_proto))
@@ -70,6 +80,7 @@ def get_or_create_origin(orig_id):
     if not origin:
         origin = Origin()
         origin.identifier = orig_id
+        db_session.add(origin)
     return origin
 
 
@@ -78,4 +89,5 @@ def get_or_create_url(url):
     if not url_row:
         url_row = Url()
         url_row.url = url
-    return url
+        db_session.add(url_row)
+    return url_row

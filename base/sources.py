@@ -15,6 +15,15 @@ class WrappedSource(object):
         super(WrappedSource, self).__init__()
 
     @staticmethod
+    def get(id):
+        return WrappedSource.init_with_entry(db_session.query(Source).filter_by(id=id).first())
+
+    @staticmethod
+    def get_all():
+        for entry in db_session.query(Source).all():
+            yield WrappedSource.init_with_entry(entry)
+
+    @staticmethod
     def init_with_entry(entry):
         if entry.type == 'twitter':
             return TwitterSource(entry)
@@ -51,6 +60,14 @@ class WrappedSource(object):
     @property
     def id(self):
         return self._source.id
+
+    @property
+    def last_retrive(self):
+        return self._source.last_retrive
+
+    @last_retrive.setter
+    def last_retrive(self, val):
+        self._source.last_retrive = val
 
     def should_add_article(self, article):
         if not article:

@@ -10,20 +10,12 @@ from sqlalchemy.dialects.postgresql import \
 from base.database import Base
 
 
-user_source = Table('user_source', Base.metadata,
-    Column('user_id', Integer, ForeignKey('user.id')),
-    Column('source.id', Integer, ForeignKey('source.id'))
-)
-
-
 class User(Base):
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
     info = Column(JSON)
     email = Column(String(255), index=True, unique=True)
-
-    sources = relationship('Source', secondary=user_source)
 
 
 class UserClassifier(Base):
@@ -33,6 +25,23 @@ class UserClassifier(Base):
     user_id = Column(Integer, ForeignKey('user.id'), index=True, unique=True)
     classifier = Column(BYTEA, nullable=False)
     locked = Column(DateTime, nullable=True)
+
+
+class Source(Base):
+    __tablename__ = 'source'
+
+    id = Column(Integer, primary_key=True)
+    info = Column(JSON, nullable=False)
+    type = Column(String(255), nullable=False)
+    ext_uid = Column(String(512), index=True, nullable=False, unique=True)
+    last_retrive = Column(DateTime, nullable=True)
+    is_private = Column(BOOLEAN, nullable=False)
+
+
+user_source = Table('user_source', Base.metadata,
+    Column('user_id', Integer, ForeignKey('user.id')),
+    Column('source.id', Integer, ForeignKey('source.id'))
+)
 
 
 class UserUrl(Base):
@@ -52,17 +61,6 @@ class Url(Base):
 
     id = Column(Integer, primary_key=True)
     url = Column(String(512), unique=True, index=True)
-
-
-class Source(Base):
-    __tablename__ = 'source'
-
-    id = Column(Integer, primary_key=True)
-    info = Column(JSON, nullable=False)
-    type = Column(String(255), nullable=False)
-    ext_uid = Column(String(512), index=True, nullable=False, unique=True)
-    last_retrive = Column(DateTime, nullable=True)
-    is_private = Column(BOOLEAN, nullable=False)
 
 
 class Origin(Base):
