@@ -4,7 +4,8 @@ import importlib
 import hashlib
 import time
 
-from base.exceptions import DuplicatedEntryException
+from base.types.exceptions import DuplicatedEntryException
+import base.log as log
 
 _queue = None
 
@@ -67,6 +68,8 @@ class _TaskQueue(object):
             end
         ''')
 
+        self.logger = log.get_logger('task queue')
+
         super(_TaskQueue, self).__init__()
 
     def add_task(self, func, args, queue="default", timeout=300, delay=0, renew=False):
@@ -105,7 +108,11 @@ class _TaskQueue(object):
         if result:
             task, tid = result
             func, args = self._deserialize(task)
-            self._redis.hset(queue + '_done', tid, 1)
+            self.logger.debug("Popped task {0}, {1}".format(func, args))
+            try:
+                func(*args)
+            except Exception:
+                self.logger.error("Task {0}, {1} failed".format(func, args), exc_info=True)
             self._completer(keys=[tid, queue, int(time.time())])
             return True
         else:

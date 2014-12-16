@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from base.sources import TwitterSource, RssSource
+from base.types.sources import TwitterSource, RssSource
 import base.config as config
-from base.database import db_session
-from base.util import ArticleProto
+from base.database.session import db_session
+from base.types.data import ArticleProto
+import base.log as log
 from twitter import Twitter, OAuth
 import dateutil.parser as date_parser
 import feedparser
@@ -32,9 +33,11 @@ class Crawler(object):
 
     def __init__(self, source):
         self.source = source
+        self.log = log.get_logger('crawler {0}'.format(self.source.id))
 
     def crawl(self):
         self.start_time = datetime.now()
+        self.log.info('Starting to crawl')
         for entry in self.get_json_entries():
             article = self.to_article_proto(entry)
             if article:
@@ -48,6 +51,7 @@ class Crawler(object):
     def to_article_proto(self, json_entry):
         article = self.process(json_entry)
         if not self.source.should_add_article(article):
+            self.log.info('Article {0} should not be added'.format(article.title))
             return None
         time_ago = self.start_time - article.timestamp
         if time_ago > self.MAX_AGO:
@@ -80,6 +84,7 @@ class TwitterCrawler(Crawler):
         try:
             results = t.statuses.home_timeline(count=count, since_id=self.source.since_id)
         except ValueError as e:
+            self.log.warning('Failed to get twitter timeline, retrying')
             if count > 30:
                 results = self.get_twitter_timeline(t, since_id=since_id, max_id=max_id, count=count / 2)
                 results += self.get_twitter_timeline(t, since_id=since_id, max_id=results[-1]['id'], count=count / 2)

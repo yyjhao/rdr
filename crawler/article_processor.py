@@ -2,12 +2,15 @@
 
 from sqlalchemy.exc import IntegrityError
 
-from base.database import db_session
-from base.models import Article, Origin, Url
-from base.util import ArticleProto
+from base.database.session import db_session
+from base.database.models import Article, Origin, Url
+from base.types.data import ArticleProto
+import base.log as log
 from crawler.url_util import normalize_url
 
-from base.exceptions import DuplicatedEntryException
+from base.types.exceptions import DuplicatedEntryException
+
+logger = log.get_logger('article processor')
 
 
 def process(article_proto):
@@ -55,6 +58,7 @@ def process_and_add(article_proto):
     try:
         update_relation(article, article_proto)
     except DuplicatedEntryException as e:
+        logger.warning("article {0} from {1} duplocated, igored".format(article_proto.title, article_proto.source_id))
         return
     db_session.add(article)
 
@@ -65,10 +69,12 @@ def process_and_add(article_proto):
             db_session.commit()
             return
         except IntegrityError as e:
+            logger.warning("Race condition detected with origin {0} and url {1}".format(article_proto.origin, article_proto.url))
             db_session.rollback()
             try:
                 update_relation(article, article_proto)
             except DuplicatedEntryException as e:
+                logger.warning("article {0} from {1} duplocated, igored".format(article_proto.title, article_proto.source_id))
                 return
             db_session.add(article)
 
