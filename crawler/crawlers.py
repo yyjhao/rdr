@@ -3,7 +3,7 @@
 from base.types.sources import TwitterSource, RssSource
 import base.config as config
 from base.database.session import db_session
-from base.types.data import ArticleProto
+from base.types.article import WrappedArticle
 import base.log as log
 from twitter import Twitter, OAuth
 import dateutil.parser as date_parser
@@ -11,11 +11,13 @@ import feedparser
 from time import mktime
 from datetime import datetime, timedelta
 from crawler.util import htmltruncate
-from crawler.article_processor import process_and_add
-
 from worker.task_queue import get_queue
 
 from bs4 import BeautifulSoup, Comment
+
+
+def add_article(article):
+    article.to_normalized().save()
 
 
 def truncate_html(html_string):
@@ -39,16 +41,16 @@ class Crawler(object):
         self.start_time = datetime.now()
         self.log.info('Starting to crawl')
         for entry in self.get_json_entries():
-            article = self.to_article_proto(entry)
+            article = self.to_article(entry)
             if article:
-                get_queue().add_task(process_and_add, (article,), queue='article_processor')
+                get_queue().add_task(add_article, (article,), queue='article_processor')
         self.source.last_retrive = self.start_time
         try:
             db_session.commit()
         except Exception as e:
             db_session.rollback()
 
-    def to_article_proto(self, json_entry):
+    def to_article(self, json_entry):
         article = self.process(json_entry)
         if not self.source.should_add_article(article):
             self.log.info('Article {0} should not be added'.format(article.title))
@@ -114,7 +116,7 @@ class TwitterCrawler(Crawler):
         if not url:
             return None
 
-        return ArticleProto(
+        return WrappedArticle(
             url=url,
             title=json_entry['text'],
             timestamp=date_parser.parse(json_entry['created_at']).replace(tzinfo=None),
@@ -169,7 +171,7 @@ class RssCrawler(Crawler):
             time_unknown = True
             timestamp = self.start_time
 
-        return ArticleProto(
+        return WrappedArticle(
             url=url,
             title=json_entry.get('title'),
             timestamp=timestamp,
