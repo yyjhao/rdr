@@ -1,4 +1,3 @@
-from redis import StrictRedis
 import pickle
 import importlib
 import hashlib
@@ -6,13 +5,15 @@ import time
 
 from base.types.exceptions import DuplicatedEntryException
 import base.log as log
+from base.redis import task_queue_redis
+
 
 _queue = None
 
 
 class _TaskQueue(object):
     def __init__(self):
-        self._redis = StrictRedis()
+        self._redis = task_queue_redis
 
         self._adder = self._redis.register_script('''
             local hash = KEYS[1]
