@@ -117,6 +117,7 @@ class TwitterCrawler(Crawler):
             return None
 
         return WrappedArticle(
+            id=0,
             url=url,
             title=json_entry['text'],
             timestamp=date_parser.parse(json_entry['created_at']).replace(tzinfo=None),
@@ -172,6 +173,7 @@ class RssCrawler(Crawler):
             timestamp = self.start_time
 
         return WrappedArticle(
+            id=0,
             url=url,
             title=json_entry.get('title'),
             timestamp=timestamp,

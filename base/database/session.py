@@ -4,7 +4,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 import base.config as config
 
-engine = create_engine(config.POSTGRE)
+engine = create_engine(config.POSTGRE, use_native_hstore=False)
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))

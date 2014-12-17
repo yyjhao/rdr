@@ -1,4 +1,5 @@
 from sqlalchemy import Column, ForeignKey, Index, Table
+from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy import Integer, String, DateTime, UniqueConstraint, Text
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import \
@@ -40,20 +41,24 @@ class Source(Base):
 
 user_source = Table('user_source', Base.metadata,
     Column('user_id', Integer, ForeignKey('user.id')),
-    Column('source.id', Integer, ForeignKey('source.id'))
+    Column('source_id', Integer, ForeignKey('source.id')),
+    Column('last_append_id', Integer, nullable=True),
 )
 
 
 class UserUrl(Base):
     __tablename__ = 'user_url'
-    __table_args__ = (Index('user_url_index', "user_id", "url_id"), )
+    __table_args__ = (
+        Index('user_url_index', "user_id", "url_id"),
+        UniqueConstraint('user_id', 'url_id', name='user_single_url'),
+    )
 
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'), index=True)
     url_id = Column(Integer, ForeignKey('url.id'), index=True)
     score = Column(Integer, index=True)
     last_action = Column(Integer, index=True)
-    articles = Column(ARRAY(Integer), nullable=False)
+    articles = Column(MutableDict.as_mutable(HSTORE))
 
 
 class Url(Base):

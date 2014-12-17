@@ -1,6 +1,6 @@
 from crawler.crawlers import Crawler
-from base.models import Source
-from base.sources import WrappedSource, RssSource
+from base.database.models import Source
+from base.types.sources import WrappedSource, RssSource
 
 
 source = RssSource.create_or_update('http://feeds.feedburner.com/Techcrunch')

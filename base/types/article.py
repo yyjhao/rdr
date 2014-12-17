@@ -69,7 +69,6 @@ class WrappedArticle(_ArticleProto, Cachable):
             for i in ids
         ]
 
-    @classmethod
     def save_fresh(self):
         article = self._to_db_entry()
 
@@ -122,6 +121,8 @@ class WrappedArticle(_ArticleProto, Cachable):
         article.title = self.title
         article.timestamp = self.timestamp
         article.summary = self.summary
+        article.source_id = self.source_id
+        article.image_url = self.image_url
 
         return article
 
@@ -137,9 +138,11 @@ class WrappedArticle(_ArticleProto, Cachable):
 
         # TODO: this doesn't guarantee no duplicate but the chance should be low for now
         if origin.id and url_row.id:
-            if (
+            exist = (
                 db_session
                 .query(Article)
                 .filter_by(url_id=url_row.id, origin_id=origin.id)
-                .first().title == article.title):
+                .first()
+            )
+            if exist and exist.title == article.title:
                     raise DuplicatedEntryException("article is duplicated: " + str(self))

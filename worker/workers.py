@@ -32,7 +32,7 @@ def crawl(sid):
     from crawler.crawlers import Crawler
 
     Crawler.get_crawler_for(WrappedSource.get(sid)).crawl()
-    get_queue().add_task(crawl, (sid,), queue='crawler_queue', delay=3600, renew=True)
+    get_queue().add_task(crawl, (sid,), queue='crawler_queue', delay=1800, renew=True)
 
 
 def add_source():
