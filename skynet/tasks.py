@@ -3,6 +3,7 @@ from base.database.session import db_session
 from base.database.models import user_source, Article
 from worker.task_queue import get_queue
 from skynet.scorer import Scorer
+from skynet.learner import Learner
 
 
 # def add_articles(user_id):
@@ -31,7 +32,10 @@ def add_articles_from_source(user_id, source_id, last_append_id):
 
 def score_articles(user_id):
     Scorer(user_id).score_all()
+    db_session.commit()
 
 
 def train(user_id):
-    pass
+    Learner(user_id).learn()
+    db_session.commit()
+

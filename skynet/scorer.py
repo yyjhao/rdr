@@ -22,7 +22,6 @@ class Scorer():
     def score_all(self):
         for uu in WrappedUserUrl.get_for_user(self.user_id):
             self.score(uu)
-        db_session.commit()
 
     def score(self, user_url):
         if self.classifier:

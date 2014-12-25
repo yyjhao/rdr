@@ -1,5 +1,6 @@
-from base.models import UserUrl, UserClassifier
-from base.database import db_session
+from base.database.models import UserUrl, UserClassifier
+from base.database.session import db_session
+from base.types.user_url import WrappedUserUrl
 from skynet.classifiers import SVMClassifier
 
 
@@ -22,7 +23,9 @@ class Learner():
 
         training_set = []
         for t in ('like', 'dislike', 'defer', 'pass'):
-            training_set += self.get_training_set(t, int(total_num / 4) if t != 'pass' else (total_num - len(training_set)))
+            cur_set = self.get_training_set(t, int(total_num / 4) if t != 'pass' else (total_num - len(training_set)))
+            for uu in cur_set:
+                training_set.append(WrappedUserUrl(uu))
 
         if not training_set:
             return

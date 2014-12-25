@@ -49,7 +49,7 @@ class WrappedUserUrl(object):
         self.added_articles.clear()
 
     def get_articles(self):
-        return WrappedArticle.get_multiple(self.db_entry.articles)
+        return WrappedArticle.get_multiple([int(i) for i in self.db_entry.articles.keys()])
 
     @property
     def score(self):
@@ -57,3 +57,18 @@ class WrappedUserUrl(object):
     @score.setter
     def score(self, value):
         self.db_entry.score = value
+
+    @property
+    def last_action(self):
+        return self.db_entry.last_action
+    @last_action.setter
+    def last_action(self, value):
+        self.db_entry.last_action = value
+
+    @property
+    def id(self):
+        return self.db_entry.id
+    @id.setter
+    def id(self, value):
+        self.db_entry.id = value
+    
