@@ -14,6 +14,12 @@ class WrappedUserUrl(object):
         super(WrappedUserUrl, self).__init__()
 
     @staticmethod
+    def get_for_user(user_id):
+        articles = db_session.query(UserUrl).filter_by(user_id=user_id, last_action=None).all()
+        for a in articles:
+            yield WrappedUserUrl(a)
+
+    @staticmethod
     def get_or_create(url_id, user_id):
         db_entry = (
             db_session.query(UserUrl)
@@ -44,3 +50,10 @@ class WrappedUserUrl(object):
 
     def get_articles(self):
         return WrappedArticle.get_multiple(self.db_entry.articles)
+
+    @property
+    def score(self):
+        return self.db_entry.score
+    @score.setter
+    def score(self, value):
+        self.db_entry.score = value

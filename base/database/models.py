@@ -58,6 +58,7 @@ class UserUrl(Base):
     url_id = Column(Integer, ForeignKey('url.id'), index=True)
     score = Column(Integer, index=True)
     last_action = Column(Integer, index=True)
+    last_action_timestamp = Column(DateTime, index=True)
     articles = Column(MutableDict.as_mutable(HSTORE))
 
 

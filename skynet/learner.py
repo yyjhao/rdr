@@ -1,25 +1,18 @@
-from base.models import Article, UserClassifier
+from base.models import UserUrl, UserClassifier
 from base.database import db_session
+from skynet.classifiers import SVMClassifier
 
-from skynet.nlp_util import gen_feature
-from skynet.config import SCORE_DICT
-from skynet.classifiers import NaiveBayesClassifier, SVMClassifier
-
-import nltk
-
-import cPickle
 
 class Learner():
     def __init__(self, user_id):
         self.user_id = user_id
 
-
-    def get_articles(self, article_type, num):
+    def get_training_set(self, action_type, num):
         return (
             db_session
-            .query(Article)
-            .filter_by(user_id=self.user_id, last_action=article_type)
-            .order_by(Article.last_action_timestamp.desc())
+            .query(UserUrl)
+            .filter_by(user_id=self.user_id, last_action=action_type)
+            .order_by(UserUrl.last_action_timestamp.desc())
             .limit(num)
             .all()
         )
@@ -27,16 +20,15 @@ class Learner():
     def learn(self):
         total_num = 2000
 
-        training_articles = []
+        training_set = []
         for t in ('like', 'dislike', 'defer', 'pass'):
-            training_articles += self.get_articles(t, int(total_num / 4) if t != 'pass' else (total_num - len(training_articles)))
+            training_set += self.get_training_set(t, int(total_num / 4) if t != 'pass' else (total_num - len(training_set)))
 
-        if not training_articles:
+        if not training_set:
             return
 
         classifier = SVMClassifier()
-        # classifier = NaiveBayesClassifier()
-        classifier.train(training_articles)
+        classifier.train(training_set)
 
         store = db_session.query(UserClassifier).filter_by(user_id=self.user_id).first()
         if not store:
@@ -45,4 +37,3 @@ class Learner():
 
         store.classifier = classifier.dumps()
         db_session.add(store)
-
