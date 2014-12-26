@@ -73,7 +73,7 @@ def tokenizer(user_url):
             # for term in list(bi) + terms:
             for term in terms:
                 yield Token('summary', term)
-        yield Token('origin', article.origin)
+        yield Token('origin', article.origin_id)
     parsed_uri = urlparse(an_article.url)
     domain = parsed_uri.netloc
     yield Token('domain', domain)

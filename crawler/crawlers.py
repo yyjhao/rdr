@@ -11,13 +11,13 @@ import feedparser
 from time import mktime
 from datetime import datetime, timedelta
 from crawler.util import htmltruncate
-from worker.task_queue import get_queue
+from worker.task_queue import article_processor
 
 from bs4 import BeautifulSoup, Comment
 
-
 def add_article(article):
-    article.to_normalized().save()
+    article.normalize()
+    article.save()
 
 
 def truncate_html(html_string):
@@ -36,6 +36,13 @@ class Crawler(object):
     def __init__(self, source):
         self.source = source
         self.log = log.get_logger('crawler {0}'.format(self.source.id))
+        self._new_articles = 0
+
+    def new_article_count(self):
+        return self._new_articles
+
+    def clear_article_count(self):
+        self._new_articles = 0
 
     def crawl(self):
         self.start_time = datetime.now()
@@ -43,7 +50,8 @@ class Crawler(object):
         for entry in self.get_json_entries():
             article = self.to_article(entry)
             if article:
-                get_queue().add_task(add_article, (article,), queue='article_processor')
+                article_processor.add_task(add_article, (article,))
+                self._new_articles += 1
         self.source.last_retrive = self.start_time
         try:
             db_session.commit()
@@ -127,6 +135,8 @@ class TwitterCrawler(Crawler):
             source_id=self.source.id,
             summary=None,
             time_unknown=False,
+            origin_id=None,
+            url_id=None,
         )
 
 
@@ -184,4 +194,6 @@ class RssCrawler(Crawler):
             image_url=None,
             source_id=self.source.id,
             time_unknown=time_unknown,
+            origin_id=None,
+            url_id=None,
         )

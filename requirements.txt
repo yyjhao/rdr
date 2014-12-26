@@ -13,3 +13,4 @@ unidecode==0.04.16
 python-dateutil==2.3
 redis==2.10.3
 pandas==0.15.2
+namedlist=1.6

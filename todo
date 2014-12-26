@@ -1,3 +1,4 @@
-integrate AI
+integrate AI to taskqueue
 clean up
 revamp api layer to use async
+exponential backoff for delay

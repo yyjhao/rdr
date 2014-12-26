@@ -3,7 +3,7 @@ import json
 import feedparser
 from sqlalchemy.exc import IntegrityError
 
-from base.database.models import Source, user_source
+from base.database.models import Source, UserSource
 from base.database.session import db_session
 import base.config as config
 
@@ -77,7 +77,7 @@ class WrappedSource(object):
         return self._source.last_retrive < article.timestamp
 
     def add_to_user(self, user):
-        db_session.execute(user_source.insert(), user_id=user.id, source_id=self.id)
+        db_session.execute(UserSource.insert(), user_id=user.id, source_id=self.id)
 
 
 class TwitterSource(WrappedSource):

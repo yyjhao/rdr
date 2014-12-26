@@ -25,7 +25,6 @@ class UserClassifier(Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'), index=True, unique=True)
     classifier = Column(BYTEA, nullable=False)
-    locked = Column(DateTime, nullable=True)
 
 
 class Source(Base):
@@ -38,13 +37,16 @@ class Source(Base):
     last_retrive = Column(DateTime, nullable=True)
     is_private = Column(BOOLEAN, nullable=False)
 
+class UserSource(Base):
+    __tablename__ = 'user_source'
+    __table_args__ = (
+        UniqueConstraint('user_id', 'source_id', name='user_source_unique'),
+    )
 
-user_source = Table('user_source', Base.metadata,
-    Column('user_id', Integer, ForeignKey('user.id')),
-    Column('source_id', Integer, ForeignKey('source.id')),
-    Column('last_append_id', Integer, nullable=True),
-)
-
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    source_id = Column(Integer, ForeignKey('source.id'))
+    last_append_id = Column(Integer, nullable=True)
 
 class UserUrl(Base):
     __tablename__ = 'user_url'

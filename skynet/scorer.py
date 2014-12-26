@@ -6,6 +6,9 @@ from skynet.config import SCORE_DICT, MAX_SCORE
 from skynet.classifiers import SVMClassifier
 
 import random
+import base.log as log
+
+logger = log.get_logger('scorer')
 
 
 class Scorer():
@@ -17,10 +20,15 @@ class Scorer():
                 db_session.query(UserClassifier).filter_by(user_id=user_id).first().classifier
             )
         else:
+            logger.info("User {0} does not have trained classifier.".format(user_id))
             self.classifier = None
 
     def score_all(self):
         for uu in WrappedUserUrl.get_for_user(self.user_id):
+            self.score(uu)
+
+    def score_new(self):
+        for uu in WrappedUserUrl.get_for_user(self.user_id, only_unscored=True):
             self.score(uu)
 
     def score(self, user_url):

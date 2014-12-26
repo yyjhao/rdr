@@ -1,6 +1,6 @@
 import json
 import datetime
-from collections import namedtuple
+from namedlist import namedlist
 from sqlalchemy.exc import IntegrityError
 
 from base.database.session import db_session
@@ -11,9 +11,9 @@ from crawler.url_util import normalize_url
 from base.types.cachable import Cachable
 from base.types.exceptions import DuplicatedEntryException
 
-_ArticleProto = namedtuple(
+_ArticleProto = namedlist(
     '_ArticleProto',
-    ['id', 'title', 'summary', 'url', 'timestamp', 'origin', 'image_url', 'source_id', 'origin_img', 'origin_display_name', 'time_unknown'],
+    ['id', 'title', 'summary', 'url', 'timestamp', 'origin', 'image_url', 'source_id', 'origin_img', 'origin_display_name', 'time_unknown', 'origin_id', 'url_id'],
 )
 
 logger = log.get_logger('article processor')
@@ -39,6 +39,8 @@ class WrappedArticle(_ArticleProto, Cachable):
             "origin_img": self.origin_img,
             "origin_display_name": self.origin_display_name,
             "time_unknown": self.time_unknown,
+            "origin_id": self.origin_id,
+            "url_id": self.url_id,
         })
 
     @classmethod
@@ -56,6 +58,8 @@ class WrappedArticle(_ArticleProto, Cachable):
             origin_img=d["origin_img"],
             origin_display_name=d["origin_display_name"],
             time_unknown=False,
+            origin_id=d["origin_id"],
+            url_id=d["url_id"],
         )
 
     @classmethod
@@ -84,6 +88,9 @@ class WrappedArticle(_ArticleProto, Cachable):
             try:
                 db_session.add(article)
                 db_session.commit()
+                self.id = article.id
+                self.origin_id = article.origin_id
+                self.url_id = article.url_id
                 return
             except IntegrityError as e:
                 logger.warning("Race condition detected with origin {0} and url {1}".format(self.origin, self.url))
@@ -96,8 +103,8 @@ class WrappedArticle(_ArticleProto, Cachable):
 
         raise Exception("Failed to add article_proto: " + str(self))
 
-    def to_normalized(self):
-        return self._replace(url=normalize_url(self.url))
+    def normalize(self):
+        self.url = normalize_url(self.url)
 
     @classmethod
     def from_db_entry(cls, article):
@@ -113,6 +120,8 @@ class WrappedArticle(_ArticleProto, Cachable):
             origin_img=article.origin.image_url,
             origin_display_name=article.origin.display_name,
             time_unknown=False,
+            origin_id=article.origin.id,
+            url_id=article.url.id,
         )
 
     def _to_db_entry(self):
@@ -145,4 +154,4 @@ class WrappedArticle(_ArticleProto, Cachable):
                 .first()
             )
             if exist and exist.title == article.title:
-                    raise DuplicatedEntryException("article is duplicated: " + str(self))
+                raise DuplicatedEntryException("article is duplicated: " + str(self))

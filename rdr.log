@@ -1051,3 +1051,466 @@ AttributeError: 'NoneType' object has no attribute 'title'
 2014-12-25 14:18:02,263 INFO [cache]: Cache for key article:38 misses.
 2014-12-25 14:18:02,270 INFO [cache]: Cache for key article:23 misses.
 2014-12-25 14:35:28,870 INFO [cache]: Cache for key article:22 misses.
+2014-12-26 05:57:50,042 ERROR [worker]: Worker 4 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca6cc>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,081 ERROR [worker]: Worker 4 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd20c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,033 ERROR [worker]: Worker 6 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca72c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,078 ERROR [worker]: Worker 3 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca6cc>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,098 ERROR [worker]: Worker 6 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd20c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,103 ERROR [worker]: Worker 3 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd20c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,101 ERROR [worker]: Worker 9 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70caa4c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,104 ERROR [worker]: Worker 1 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca6cc>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,099 ERROR [worker]: Worker 5 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca6cc>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,122 ERROR [worker]: Worker 9 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd4ac>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,135 ERROR [worker]: Worker 5 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd20c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,137 ERROR [worker]: Worker 1 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd20c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,160 ERROR [worker]: Worker 2 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca6cc>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,165 ERROR [worker]: Worker 0 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca6cc>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,172 ERROR [worker]: Worker 0 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd20c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,172 ERROR [worker]: Worker 2 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd20c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,168 ERROR [worker]: Worker 7 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca80c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,187 ERROR [worker]: Worker 7 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd26c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,195 ERROR [worker]: Worker 8 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca92c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,202 ERROR [worker]: Worker 8 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd38c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:50,267 INFO [worker]: Attempting to add Source 1 to task queue.
+2014-12-26 05:57:51,089 ERROR [worker]: Worker 4 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca6cc>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,091 ERROR [worker]: Worker 4 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd20c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,116 ERROR [worker]: Worker 6 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca72c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,118 ERROR [worker]: Worker 3 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca6cc>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,121 ERROR [worker]: Worker 3 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd20c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,122 ERROR [worker]: Worker 6 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd20c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,137 ERROR [worker]: Worker 9 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70caa4c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,140 ERROR [worker]: Worker 9 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd4ac>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,151 ERROR [worker]: Worker 1 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca6cc>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,150 ERROR [worker]: Worker 5 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca6cc>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,153 ERROR [worker]: Worker 1 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd20c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,153 ERROR [worker]: Worker 5 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd20c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,177 ERROR [worker]: Worker 0 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca6cc>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,180 ERROR [worker]: Worker 0 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd20c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,184 ERROR [worker]: Worker 2 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca6cc>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,187 ERROR [worker]: Worker 2 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd20c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,196 ERROR [worker]: Worker 7 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca80c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,199 ERROR [worker]: Worker 7 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd26c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,214 ERROR [worker]: Worker 8 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70ca92c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:57:51,217 ERROR [worker]: Worker 8 failed to execute a task on Queue <worker.task_queue.TaskQueue object at 0xb70cd38c>
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/workers.py", line 19, in work_for
+    r = q.pop_and_execute(q)
+TypeError: pop_and_execute() takes 1 positional argument but 2 were given
+2014-12-26 05:58:43,724 DEBUG [task queue]: Popped task <function crawl at 0xb717b6ec>, (1,), b'd7809491a7040f29b71f61ef268906dbaa4834e6'
+2014-12-26 05:58:43,832 INFO [worker]: Attempting to add Source 1 to task queue.
+2014-12-26 05:58:43,940 ERROR [task queue]: Task <function crawl at 0xb717b6ec>, (1,), b'd7809491a7040f29b71f61ef268906dbaa4834e6' failed
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/task_queue.py", line 115, in pop_and_execute
+    func(*args)
+  File "/vagrant/rdr/worker/workers.py", line 31, in crawl
+    from crawler.tasks import crawl_for_source
+  File "/vagrant/rdr/crawler/tasks.py", line 2, in <module>
+    from crawler.crawlers import Crawler
+  File "/vagrant/rdr/crawler/crawlers.py", line 6, in <module>
+    from base.types.article import WrappedArticle
+  File "/vagrant/rdr/base/types/article.py", line 3, in <module>
+    from recordtype import recordtype
+ImportError: No module named 'recordtype'
+2014-12-26 05:58:43,953 INFO [task queue]: Task b'd7809491a7040f29b71f61ef268906dbaa4834e6' took -0.21892118453979492 seconds
+2014-12-26 05:58:43,954 INFO [worker]: Worker 5 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb70a456c>
+2014-12-26 05:58:43,955 DEBUG [task queue]: Popped task <function crawl at 0xb717b6ec>, (1,), b'd7809491a7040f29b71f61ef268906dbaa4834e6'
+2014-12-26 05:58:43,962 ERROR [task queue]: Task <function crawl at 0xb717b6ec>, (1,), b'd7809491a7040f29b71f61ef268906dbaa4834e6' failed
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/task_queue.py", line 115, in pop_and_execute
+    func(*args)
+  File "/vagrant/rdr/worker/workers.py", line 31, in crawl
+    from crawler.tasks import crawl_for_source
+  File "/vagrant/rdr/crawler/tasks.py", line 2, in <module>
+    from crawler.crawlers import Crawler
+  File "/vagrant/rdr/crawler/crawlers.py", line 6, in <module>
+    from base.types.article import WrappedArticle
+  File "/vagrant/rdr/base/types/article.py", line 3, in <module>
+    from recordtype import recordtype
+ImportError: No module named 'recordtype'
+2014-12-26 05:58:43,968 INFO [task queue]: Task b'd7809491a7040f29b71f61ef268906dbaa4834e6' took -0.01240229606628418 seconds
+2014-12-26 05:58:43,968 INFO [worker]: Worker 5 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb70a456c>
+2014-12-26 06:01:39,885 INFO [worker]: Attempting to add Source 1 to task queue.
+2014-12-26 06:01:40,652 DEBUG [task queue]: Popped task <function crawl at 0xb71625cc>, (1,), b'd7809491a7040f29b71f61ef268906dbaa4834e6'
+2014-12-26 06:01:40,728 ERROR [task queue]: Task <function crawl at 0xb71625cc>, (1,), b'd7809491a7040f29b71f61ef268906dbaa4834e6' failed
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/task_queue.py", line 115, in pop_and_execute
+    func(*args)
+  File "/vagrant/rdr/worker/workers.py", line 31, in crawl
+    from crawler.tasks import crawl_for_source
+  File "/vagrant/rdr/crawler/tasks.py", line 2, in <module>
+    from crawler.crawlers import Crawler
+  File "/vagrant/rdr/crawler/crawlers.py", line 15, in <module>
+    from crawler.tasks import add_article
+ImportError: cannot import name 'add_article'
+2014-12-26 06:01:40,736 INFO [task queue]: Task b'd7809491a7040f29b71f61ef268906dbaa4834e6' took -0.08400654792785645 seconds
+2014-12-26 06:01:40,737 INFO [worker]: Worker 3 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb7102acc>
+2014-12-26 06:03:01,230 INFO [worker]: Attempting to add Source 1 to task queue.
+2014-12-26 06:03:02,096 DEBUG [task queue]: Popped task <function crawl at 0xb72045cc>, (1,), b'd7809491a7040f29b71f61ef268906dbaa4834e6'
+2014-12-26 06:03:02,209 INFO [crawler 1]: Starting to crawl
+2014-12-26 06:03:41,369 INFO [worker]: Attempting to add Source 1 to task queue.
+2014-12-26 06:04:07,643 INFO [worker]: Attempting to add Source 1 to task queue.
+2014-12-26 06:04:08,559 DEBUG [task queue]: Popped task <function crawl at 0xb71845cc>, (1,), b'd7809491a7040f29b71f61ef268906dbaa4834e6'
+2014-12-26 06:04:08,660 INFO [crawler 1]: Starting to crawl
+2014-12-26 06:04:26,442 ERROR [task queue]: Task <function crawl at 0xb71845cc>, (1,), b'd7809491a7040f29b71f61ef268906dbaa4834e6' failed
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/task_queue.py", line 115, in pop_and_execute
+    func(*args)
+  File "/vagrant/rdr/worker/workers.py", line 33, in crawl
+    if crawl_for_source(sid):
+  File "/vagrant/rdr/crawler/tasks.py", line 7, in crawl_for_source
+    crawler.crawl()
+  File "/vagrant/rdr/crawler/crawlers.py", line 51, in crawl
+    article = self.to_article(entry)
+  File "/vagrant/rdr/crawler/crawlers.py", line 62, in to_article
+    article = self.process(json_entry)
+  File "/vagrant/rdr/crawler/crawlers.py", line 194, in process
+    time_unknown=time_unknown,
+TypeError: __init__() missing 2 required positional arguments: 'origin_id' and 'url_id'
+2014-12-26 06:04:26,453 INFO [task queue]: Task b'd7809491a7040f29b71f61ef268906dbaa4834e6' took -17.892967462539673 seconds
+2014-12-26 06:04:26,453 INFO [worker]: Worker 6 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb712aacc>
+2014-12-26 06:05:24,932 INFO [worker]: Attempting to add Source 1 to task queue.
+2014-12-26 06:05:25,786 DEBUG [task queue]: Popped task <function crawl at 0xb71e35cc>, (1,), b'd7809491a7040f29b71f61ef268906dbaa4834e6'
+2014-12-26 06:05:25,906 INFO [crawler 1]: Starting to crawl
+2014-12-26 06:05:32,861 INFO [task queue]: Task b'd7809491a7040f29b71f61ef268906dbaa4834e6' took -7.074181318283081 seconds
+2014-12-26 06:05:32,862 INFO [worker]: Worker 4 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb7183bac>
+2014-12-26 06:05:32,863 DEBUG [task queue]: Popped task <function add_article at 0xb60cdd64>, (WrappedArticle(id=0, title='Rethinking Work-Life Balance', summary='<html><head></head><body><img alt="6871361948_f023e28a4d_k" class="attachment-large wp-post-image" height="453" src="http://tctechcrunch2011.files.wordpress.com/2014/12/6871361948_f023e28a4d_k.jpg?w=680" width="680"/>\xa0It’s also a worthless concept as it’s typically presented. Everything\xa0I’ve read on the subject isn’t helpful for entrepreneurs and startup employees because it starts with the assumption that you have an evil boss forcing you to work unreasonable hours. Usually, that’s not the case if you’re at a startup. You may not have a boss – and most of us love… <a href="http://techcrunch.com/2014/12/24/rethinking-work-life-balance/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=A-BaiBYo5aw:eqkQbIwjt-c:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=A-BaiBYo5aw:eqkQbIwjt-c:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=A-BaiBYo5aw:eqkQbIwjt-c:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=A-BaiBYo5aw:eqkQbIwjt-c:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=A-BaiBYo5aw:eqkQbIwjt-c:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=A-BaiBYo5aw:eqkQbIwjt-c:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=A-BaiBYo5aw:eqkQbIwjt-c:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=A-BaiBYo5aw:eqkQbIwjt-c:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/A-BaiBYo5aw" width="1"/></body></html>', url='http://techcrunch.com/2014/12/24/rethinking-work-life-balance/?ncid=rss', timestamp=datetime.datetime(2014, 12, 25, 2, 0, 36), origin='1:Blake Commagere', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Blake Commagere', time_unknown=False, origin_id=None, url_id=None),), b'29b6b0dcfd03e48545a217fc158d85c68deb2568'
+2014-12-26 06:05:32,950 INFO [task queue]: Task b'29b6b0dcfd03e48545a217fc158d85c68deb2568' took -0.08225297927856445 seconds
+2014-12-26 06:05:32,955 INFO [worker]: Worker 4 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f56c>
+2014-12-26 06:05:32,962 DEBUG [task queue]: Popped task <function add_article at 0xb60cdd64>, (WrappedArticle(id=0, title='The Key To Successful Commerce Businesses Is Supply Chain', summary='<html><head></head><body><img alt="Kiva robots" class="attachment-large wp-post-image" height="453" src="http://tctechcrunch2011.files.wordpress.com/2014/12/kiva1.jpg?w=680" width="680"/>\xa0It may surprise many of you to learn that Dell Computer was the highest appreciating tech stock of the 90s. This success was grounded not in marketing or product, but primarily behind the scenes in a revolutionary approach to supply chain. <a href="http://techcrunch.com/2014/12/24/the-key-to-successful-commerce-businesses-is-supply-chain/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=jt20j7Qyrh0:OeUYhqxPtxM:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=jt20j7Qyrh0:OeUYhqxPtxM:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=jt20j7Qyrh0:OeUYhqxPtxM:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=jt20j7Qyrh0:OeUYhqxPtxM:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=jt20j7Qyrh0:OeUYhqxPtxM:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=jt20j7Qyrh0:OeUYhqxPtxM:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=jt20j7Qyrh0:OeUYhqxPtxM:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=jt20j7Qyrh0:OeUYhqxPtxM:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/jt20j7Qyrh0" width="1"/></body></html>', url='http://techcrunch.com/2014/12/24/the-key-to-successful-commerce-businesses-is-supply-chain/?ncid=rss', timestamp=datetime.datetime(2014, 12, 25, 0, 0, 59), origin='1:Ajay Agarwal', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Ajay Agarwal', time_unknown=False, origin_id=None, url_id=None),), b'9b2941bd1e7de420afc4da5b0075d10f782f04de'
+2014-12-26 06:05:33,031 INFO [task queue]: Task b'9b2941bd1e7de420afc4da5b0075d10f782f04de' took -0.06492400169372559 seconds
+2014-12-26 06:05:33,036 INFO [worker]: Worker 4 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f56c>
+2014-12-26 06:05:33,043 DEBUG [task queue]: Popped task <function add_article at 0xb60cdd64>, (WrappedArticle(id=0, title='Bitcoin, Burning Man And The Gifting Economy', summary='<html><head></head><body><img alt="Credit: Jim Urquhart, Reuters" class="attachment-large wp-post-image" height="467" src="http://tctechcrunch2011.files.wordpress.com/2014/09/usa-nevada_burningman-5.jpg?w=680" width="680"/>\xa0Bitcoin was a terrible investment this year, but that hasn’t stopped non-profits from asking for them anyway. Wikipedia, Electronic Frontier Foundation, Khan Academy and now even Burning Man will take those bitcoins off your hands in the form of a tax-deductible donation. While this won’t get you a golden ticket into the actual festival, gifting something without expecting anything… <a href="http://techcrunch.com/2014/12/25/bitcoin-burning-man-and-the-gifting-economy/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=uuLbcfsIglg:Owgp2tNiTTg:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=uuLbcfsIglg:Owgp2tNiTTg:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=uuLbcfsIglg:Owgp2tNiTTg:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=uuLbcfsIglg:Owgp2tNiTTg:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=uuLbcfsIglg:Owgp2tNiTTg:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=uuLbcfsIglg:Owgp2tNiTTg:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=uuLbcfsIglg:Owgp2tNiTTg:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=uuLbcfsIglg:Owgp2tNiTTg:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/uuLbcfsIglg" width="1"/></body></html>', url='http://techcrunch.com/2014/12/25/bitcoin-burning-man-and-the-gifting-economy/?ncid=rss', timestamp=datetime.datetime(2014, 12, 25, 18, 0, 59), origin='1:Sarah Buhr', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Sarah Buhr', time_unknown=False, origin_id=None, url_id=None),), b'b3f02b8a97d6bbea3b26ccae8de38e1c72788b66'
+2014-12-26 06:05:33,088 INFO [task queue]: Task b'b3f02b8a97d6bbea3b26ccae8de38e1c72788b66' took -0.039304494857788086 seconds
+2014-12-26 06:05:33,095 INFO [worker]: Worker 4 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f56c>
+2014-12-26 06:05:33,101 DEBUG [task queue]: Popped task <function add_article at 0xb60cdd64>, (WrappedArticle(id=0, title='The Future Of Wearable Technology Is In The Enterprise (At Least For Now)', summary='<html><head></head><body><img alt="sony-glass-2" class="attachment-large wp-post-image" height="439" src="http://tctechcrunch2011.files.wordpress.com/2013/03/sony-glass-2.jpg?w=680" width="680"/>\xa0The first iteration of Google Glass was\xa0a flop with consumers (almost from the beginning), most wearables ultimately go unworn, and even boosters\xa0bemoan the state of the current wearable market for consumers.\nAmid all the gloom there’s one trillion\xa0dollar bright-spot\xa0for the wearable marketplace. From the voice activated communication and logistics devices made by Theatro, to the… <a href="http://techcrunch.com/2014/12/25/the-future-of-wearable-technology-is-in-the-enterprise-at-least-for-now/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=AEe5KDmoNsI:3Dc_TfqmUKk:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=AEe5KDmoNsI:3Dc_TfqmUKk:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=AEe5KDmoNsI:3Dc_TfqmUKk:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=AEe5KDmoNsI:3Dc_TfqmUKk:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=AEe5KDmoNsI:3Dc_TfqmUKk:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=AEe5KDmoNsI:3Dc_TfqmUKk:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=AEe5KDmoNsI:3Dc_TfqmUKk:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=AEe5KDmoNsI:3Dc_TfqmUKk:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/AEe5KDmoNsI" width="1"/></body></html>', url='http://techcrunch.com/2014/12/25/the-future-of-wearable-technology-is-in-the-enterprise-at-least-for-now/?ncid=rss', timestamp=datetime.datetime(2014, 12, 25, 23, 48, 40), origin='1:Jonathan Shieber', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Jonathan Shieber', time_unknown=False, origin_id=None, url_id=None),), b'b663220c5b95ddbff71b9518264c3d4a50212734'
+2014-12-26 06:05:33,166 INFO [task queue]: Task b'b663220c5b95ddbff71b9518264c3d4a50212734' took -0.0606837272644043 seconds
+2014-12-26 06:05:33,169 INFO [worker]: Worker 4 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f56c>
+2014-12-26 06:05:33,176 DEBUG [task queue]: Popped task <function add_article at 0xb60cdd64>, (WrappedArticle(id=0, title='Interactive Content Can Save Content Marketing From The Dark Side', summary='<html><head></head><body><img alt="content" class="attachment-large wp-post-image" height="452" src="http://tctechcrunch2011.files.wordpress.com/2014/12/content.jpg?w=680" width="680"/>\xa0Not long ago, in a marketing department not far, far away, we saw the rise of content marketing. It began as a young, idealistic movement to help educate, enlighten, and entertain self-empowered buyers in the digital world. An elegant marketing for a more civilized age. <a href="http://techcrunch.com/2014/12/24/interactive-content-can-save-content-marketing-from-the-dark-side/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=66DlZaMX4KA:OQUWjydIYY0:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=66DlZaMX4KA:OQUWjydIYY0:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=66DlZaMX4KA:OQUWjydIYY0:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=66DlZaMX4KA:OQUWjydIYY0:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=66DlZaMX4KA:OQUWjydIYY0:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=66DlZaMX4KA:OQUWjydIYY0:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=66DlZaMX4KA:OQUWjydIYY0:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=66DlZaMX4KA:OQUWjydIYY0:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/66DlZaMX4KA" width="1"/></body></html>', url='http://techcrunch.com/2014/12/24/interactive-content-can-save-content-marketing-from-the-dark-side/?ncid=rss', timestamp=datetime.datetime(2014, 12, 24, 20, 0, 29), origin='1:Scott Brinker', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Scott Brinker', time_unknown=False, origin_id=None, url_id=None),), b'b79f27229551f247f86e8e2641cf1e05f40c6f89'
+2014-12-26 06:05:33,228 INFO [task queue]: Task b'b79f27229551f247f86e8e2641cf1e05f40c6f89' took -0.04871177673339844 seconds
+2014-12-26 06:05:33,230 INFO [worker]: Worker 4 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f56c>
+2014-12-26 06:05:33,238 DEBUG [task queue]: Popped task <function add_article at 0xb60cdd64>, (WrappedArticle(id=0, title='Being A Leader Sometimes Means Finding The Willingness And Courage To Be Led', summary='<html><head></head><body><img alt="leadership" class="attachment-large wp-post-image" height="454" src="http://tctechcrunch2011.files.wordpress.com/2014/12/leadership.jpg?w=680" width="680"/>\xa0A popular post on Quora by an early-stage startup founder triggered over 100 responses and more than 150,000 views — myself included. In the post, the founder (who remained anonymous) asked the community for some advice …. <a href="http://techcrunch.com/2014/12/25/being-a-leader-sometimes-means-finding-the-willingness-and-courage-to-be-led/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=-8mzRgfsv4k:SFjUBj9SAts:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=-8mzRgfsv4k:SFjUBj9SAts:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=-8mzRgfsv4k:SFjUBj9SAts:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=-8mzRgfsv4k:SFjUBj9SAts:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=-8mzRgfsv4k:SFjUBj9SAts:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=-8mzRgfsv4k:SFjUBj9SAts:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=-8mzRgfsv4k:SFjUBj9SAts:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=-8mzRgfsv4k:SFjUBj9SAts:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/-8mzRgfsv4k" width="1"/></body></html>', url='http://techcrunch.com/2014/12/25/being-a-leader-sometimes-means-finding-the-willingness-and-courage-to-be-led/?ncid=rss', timestamp=datetime.datetime(2014, 12, 25, 20, 0, 56), origin='1:Drew Austin', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Drew Austin', time_unknown=False, origin_id=None, url_id=None),), b'bc4f633105714d6b7a8c48db0d290470c6d6a32c'
+2014-12-26 06:05:33,295 INFO [task queue]: Task b'bc4f633105714d6b7a8c48db0d290470c6d6a32c' took -0.05385875701904297 seconds
+2014-12-26 06:05:33,298 INFO [worker]: Worker 4 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f56c>
+2014-12-26 06:05:33,305 DEBUG [task queue]: Popped task <function add_article at 0xb60cdd64>, (WrappedArticle(id=0, title='Nubeliu Is Bringing The Private Cloud To Latin America', summary='<html><head></head><body><img alt="8792208081_5994be71d4_k" class="attachment-large wp-post-image" height="452" src="http://tctechcrunch2011.files.wordpress.com/2014/12/8792208081_5994be71d4_k.jpg?w=680" width="680"/>\xa0Private cloud enterprise solution Nubeliu has raised a seed round from Latin American powerhouse investors Kaszek Ventures in the “couple of millions,” according to a source close to the company.\nStorm Ventures and MercadoLibre (NASDAQ: MELI) founder and CEO Marcos Galperin also participated in the round. <a href="http://techcrunch.com/2014/12/24/nubeliu-is-bringing-the-private-cloud-to-latin-america/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=kFUYz_f8Ros:dnnS-nMbCnQ:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=kFUYz_f8Ros:dnnS-nMbCnQ:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=kFUYz_f8Ros:dnnS-nMbCnQ:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=kFUYz_f8Ros:dnnS-nMbCnQ:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=kFUYz_f8Ros:dnnS-nMbCnQ:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=kFUYz_f8Ros:dnnS-nMbCnQ:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=kFUYz_f8Ros:dnnS-nMbCnQ:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=kFUYz_f8Ros:dnnS-nMbCnQ:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/kFUYz_f8Ros" width="1"/></body></html>', url='http://techcrunch.com/2014/12/24/nubeliu-is-bringing-the-private-cloud-to-latin-america/?ncid=rss', timestamp=datetime.datetime(2014, 12, 24, 21, 5, 48), origin='1:Julie Ruvolo', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Julie Ruvolo', time_unknown=False, origin_id=None, url_id=None),), b'd73b95e502d5712f0c41082b1f8c004e4019c861'
+2014-12-26 06:05:33,371 INFO [task queue]: Task b'd73b95e502d5712f0c41082b1f8c004e4019c861' took -0.05717611312866211 seconds
+2014-12-26 06:05:33,375 INFO [worker]: Worker 4 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f56c>
+2014-12-26 06:05:33,378 DEBUG [task queue]: Popped task <function add_article at 0xb60cdd64>, (WrappedArticle(id=0, title='Viewers Worldwide Are Torrenting ‘The Interview’ Despite U.S.-Only Release', summary='<html><head></head><body><img alt="The Interview" class="attachment-large wp-post-image" height="383" src="http://tctechcrunch2011.files.wordpress.com/2014/12/theinterview.jpeg?w=680" width="680"/>\xa0Yesterday, Sony made “The Interview” available online through Google Play, YouTube Movies, and Xbox Video. Unfortunately, the film was restricted to the U.S. only, so viewers in other countries either had to celebrate Christmas with a Yule Log video or run off to a torrent site. <a href="http://techcrunch.com/2014/12/25/the-interview-torrent/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=zHhzceiRvLs:_dvste-8gD0:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=zHhzceiRvLs:_dvste-8gD0:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=zHhzceiRvLs:_dvste-8gD0:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=zHhzceiRvLs:_dvste-8gD0:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=zHhzceiRvLs:_dvste-8gD0:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=zHhzceiRvLs:_dvste-8gD0:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=zHhzceiRvLs:_dvste-8gD0:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=zHhzceiRvLs:_dvste-8gD0:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/zHhzceiRvLs" width="1"/></body></html>', url='http://techcrunch.com/2014/12/25/the-interview-torrent/?ncid=rss', timestamp=datetime.datetime(2014, 12, 26, 2, 10, 48), origin='1:Catherine Shu', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Catherine Shu', time_unknown=False, origin_id=None, url_id=None),), b'dc2d9d271a8efad11efe77a3a67e5add0fce0ab2'
+2014-12-26 06:05:33,427 INFO [task queue]: Task b'dc2d9d271a8efad11efe77a3a67e5add0fce0ab2' took -0.03471255302429199 seconds
+2014-12-26 06:05:33,430 INFO [worker]: Worker 4 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f56c>
+2014-12-26 06:05:33,431 DEBUG [task queue]: Popped task <function add_article at 0xb60cdd64>, (WrappedArticle(id=0, title='Meeting The Challenges In Mobile Health Innovation', summary='<html><head></head><body><img alt="mobilehealth" class="attachment-large wp-post-image" height="510" src="http://tctechcrunch2011.files.wordpress.com/2014/12/mobilehealth.jpg?w=680" width="680"/>\xa0Preventing disease is the Holy Grail of modern medicine. Many diseases plaguing society today are chronic and brought on by lifestyle choices; others have their roots in genetic or environmental factors. Either way, the ability of the healthcare community to prevent disease is heavily influenced by information. Gather the right data with enough warning time to impact the outcome, and most… <a href="http://techcrunch.com/2014/12/25/meeting-the-challenges-in-mobile-health-innovation/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=smX1L8ZfT84:Z2nAI78M2js:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=smX1L8ZfT84:Z2nAI78M2js:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=smX1L8ZfT84:Z2nAI78M2js:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=smX1L8ZfT84:Z2nAI78M2js:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=smX1L8ZfT84:Z2nAI78M2js:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=smX1L8ZfT84:Z2nAI78M2js:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=smX1L8ZfT84:Z2nAI78M2js:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=smX1L8ZfT84:Z2nAI78M2js:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/smX1L8ZfT84" width="1"/></body></html>', url='http://techcrunch.com/2014/12/25/meeting-the-challenges-in-mobile-health-innovation/?ncid=rss', timestamp=datetime.datetime(2014, 12, 26, 1, 0, 35), origin='1:Sumit Mehra', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Sumit Mehra', time_unknown=False, origin_id=None, url_id=None),), b'f804069b916090c031f4fbc56e49df4d8236d884'
+2014-12-26 06:05:33,479 INFO [task queue]: Task b'f804069b916090c031f4fbc56e49df4d8236d884' took -0.03540229797363281 seconds
+2014-12-26 06:05:33,484 INFO [worker]: Worker 4 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f56c>
+2014-12-26 06:05:33,490 DEBUG [task queue]: Popped task <function add_article at 0xb60cdd64>, (WrappedArticle(id=0, title='In Holiday Document Dump, NSA Declassifies Compliance Errors', summary='<html><head></head><body><img alt="nsa-red" class="attachment-large wp-post-image" height="383" src="http://tctechcrunch2011.files.wordpress.com/2014/07/nsa-red.jpg?w=680" width="680"/>\xa0The National Security Agency (NSA) on Christmas Eve released a grip of compliance reports \xa0that detail its own admitted failures to always operate inside the orbit of the law.\nThe reports spanned a 12 year period, from 2001 to 2013.\xa0\xa0According to the agency, Executive Order 12333 — a controversial Regan-era law\xa0— “requires” the NSA to detail and report… <a href="http://techcrunch.com/2014/12/25/in-holiday-document-dump-nsa-declassifies-compliance-errors/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=EA7vaXQ-S28:_oJt5hndu9M:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=EA7vaXQ-S28:_oJt5hndu9M:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=EA7vaXQ-S28:_oJt5hndu9M:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=EA7vaXQ-S28:_oJt5hndu9M:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=EA7vaXQ-S28:_oJt5hndu9M:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=EA7vaXQ-S28:_oJt5hndu9M:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=EA7vaXQ-S28:_oJt5hndu9M:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=EA7vaXQ-S28:_oJt5hndu9M:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/EA7vaXQ-S28" width="1"/></body></html>', url='http://techcrunch.com/2014/12/25/in-holiday-document-dump-nsa-declassifies-compliance-errors/?ncid=rss', timestamp=datetime.datetime(2014, 12, 26, 0, 44, 33), origin='1:Alex Wilhelm', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Alex Wilhelm', time_unknown=False, origin_id=None, url_id=None),), b'f8dc245c47ff94eb98c45bdfdabe6d86c5629691'
+2014-12-26 06:05:33,543 INFO [task queue]: Task b'f8dc245c47ff94eb98c45bdfdabe6d86c5629691' took -0.05156564712524414 seconds
+2014-12-26 06:05:33,550 INFO [worker]: Worker 4 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f56c>
+2014-12-26 06:05:33,554 DEBUG [task queue]: Popped task <function add_article at 0xb60cdd64>, (WrappedArticle(id=0, title='OnePlus Allowed To Resume Sales In India After Court Order', summary='<html><head></head><body><img alt="oneplus-one9" class="attachment-large wp-post-image" height="453" src="http://tctechcrunch2011.files.wordpress.com/2014/05/oneplus-one9.jpg?w=680" width="680"/>\xa0Earlier this month, Chinese smartphone maker OnePlus stopped sales in India after a New Delhi court upheld a complaint by rival Micromax. Now the ban has been lifted and OnePlus will be able to start importing and selling devices again. <a href="http://techcrunch.com/2014/12/24/oneplus-india-sales-resume/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=pDKMS7_ypXo:sRd_i_7qkgc:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=pDKMS7_ypXo:sRd_i_7qkgc:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=pDKMS7_ypXo:sRd_i_7qkgc:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=pDKMS7_ypXo:sRd_i_7qkgc:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=pDKMS7_ypXo:sRd_i_7qkgc:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=pDKMS7_ypXo:sRd_i_7qkgc:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=pDKMS7_ypXo:sRd_i_7qkgc:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=pDKMS7_ypXo:sRd_i_7qkgc:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/pDKMS7_ypXo" width="1"/></body></html>', url='http://techcrunch.com/2014/12/24/oneplus-india-sales-resume/?ncid=rss', timestamp=datetime.datetime(2014, 12, 25, 3, 40, 20), origin='1:Catherine Shu', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Catherine Shu', time_unknown=False, origin_id=None, url_id=None),), b'fa295b3babe0a771619217221681f85b7b31f5fe'
+2014-12-26 06:05:33,605 INFO [task queue]: Task b'fa295b3babe0a771619217221681f85b7b31f5fe' took -0.047826528549194336 seconds
+2014-12-26 06:05:33,610 INFO [worker]: Worker 4 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f56c>
+2014-12-26 06:05:33,760 DEBUG [task queue]: Popped task <function add_article at 0xb617ab6c>, (WrappedArticle(id=0, title='Group Text+ Makes It Easy To Troll Your Family Over The Holidays', summary='<html><head></head><body><img alt="Group Text" class="attachment-large wp-post-image" height="396" src="http://tctechcrunch2011.files.wordpress.com/2014/12/group-text-hero.png?w=680" width="680"/>\xa0Depending on your family dynamics, the holidays are either a magical time or the most stressful period of the year. For many, having a smartphone on hand gives a quick escape from dealing with drama, but it can also serve as a barrier to letting yourself engage with those you love. <a href="http://techcrunch.com/2014/12/24/group-text-makes-it-easy-to-troll-your-family-over-the-holidays/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=P-o-F48qTzQ:QVCDm8Z4dQE:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=P-o-F48qTzQ:QVCDm8Z4dQE:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=P-o-F48qTzQ:QVCDm8Z4dQE:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=P-o-F48qTzQ:QVCDm8Z4dQE:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=P-o-F48qTzQ:QVCDm8Z4dQE:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=P-o-F48qTzQ:QVCDm8Z4dQE:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=P-o-F48qTzQ:QVCDm8Z4dQE:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=P-o-F48qTzQ:QVCDm8Z4dQE:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/P-o-F48qTzQ" width="1"/></body></html>', url='http://techcrunch.com/2014/12/24/group-text-makes-it-easy-to-troll-your-family-over-the-holidays/?ncid=rss', timestamp=datetime.datetime(2014, 12, 24, 20, 25, 32), origin='1:Kyle Russell', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Kyle Russell', time_unknown=False, origin_id=None, url_id=None),), b'18fc1c39f756be6dbfea9c154bd80cc9bfd5c09a'
+2014-12-26 06:05:33,761 DEBUG [task queue]: Popped task <function add_article at 0xb6179b6c>, (WrappedArticle(id=0, title='Facebook’s ‘Year In Review’ Feature Will Chronicle Your 2014, Good Or Bad', summary='<html><head></head><body><img alt="Screenshot 2014-12-25 10.03.21" class="attachment-large wp-post-image" height="403" src="http://tctechcrunch2011.files.wordpress.com/2014/12/screenshot-2014-12-25-10-03-21.png?w=680" width="680"/>\xa0Facebook has again unleashed its Year In Review app, automatically compiling some of the most-liked photos from your feeds over 2014 and puts them into a neat little timeline.\nWhen you sign into Facebook, you’ll see an advertisement to check out your Year In Review, customize it, and share it with your friends. If you’re still having trouble finding it, you can simply sign into… <a href="http://techcrunch.com/2014/12/25/facebooks-year-in-review-feature-will-chronicle-your-2014-good-or-bad/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=MdUXFm_RR18:s6Oo6hQ3jBQ:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=MdUXFm_RR18:s6Oo6hQ3jBQ:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=MdUXFm_RR18:s6Oo6hQ3jBQ:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=MdUXFm_RR18:s6Oo6hQ3jBQ:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=MdUXFm_RR18:s6Oo6hQ3jBQ:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=MdUXFm_RR18:s6Oo6hQ3jBQ:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=MdUXFm_RR18:s6Oo6hQ3jBQ:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=MdUXFm_RR18:s6Oo6hQ3jBQ:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/MdUXFm_RR18" width="1"/></body></html>', url='http://techcrunch.com/2014/12/25/facebooks-year-in-review-feature-will-chronicle-your-2014-good-or-bad/?ncid=rss', timestamp=datetime.datetime(2014, 12, 25, 16, 4, 45), origin='1:Jordan Crook', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Jordan Crook', time_unknown=False, origin_id=None, url_id=None),), b'385c04ae5777c5de855cca794990e79554440219'
+2014-12-26 06:05:33,777 DEBUG [task queue]: Popped task <function add_article at 0xb617ab6c>, (WrappedArticle(id=0, title='Facebook Signs Up The NFL And Verizon To Test Ads That Play After Video Clips', summary='<html><head></head><body><img alt="facebook presented by verizon" class="attachment-large wp-post-image" height="430" src="http://tctechcrunch2011.files.wordpress.com/2014/12/facebook-presented-by-verizon.jpg?w=680" width="680"/>\xa0Anyone who’s watched online videos (including those on TechCrunch TV) is probably familiar with the pre-roll ad format, where you have to watch a short ad before you get to the video that you actually want to see. Well, Facebook is testing a less obvious variant — ads that play after the video instead. The Wall Street Journal reported yesterday that the social network had signed up… <a href="http://techcrunch.com/2014/12/24/facebook-post-roll/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=_3Rq_yQl4X4:IDURn6KJOoY:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=_3Rq_yQl4X4:IDURn6KJOoY:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=_3Rq_yQl4X4:IDURn6KJOoY:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=_3Rq_yQl4X4:IDURn6KJOoY:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=_3Rq_yQl4X4:IDURn6KJOoY:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=_3Rq_yQl4X4:IDURn6KJOoY:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=_3Rq_yQl4X4:IDURn6KJOoY:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=_3Rq_yQl4X4:IDURn6KJOoY:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/_3Rq_yQl4X4" width="1"/></body></html>', url='http://techcrunch.com/2014/12/24/facebook-post-roll/?ncid=rss', timestamp=datetime.datetime(2014, 12, 24, 19, 1, 15), origin='1:Anthony Ha', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Anthony Ha', time_unknown=False, origin_id=None, url_id=None),), b'9a285d526eb48c85f73f4e1af6c9587ffa34a9e5'
+2014-12-26 06:05:33,790 DEBUG [task queue]: Popped task <function add_article at 0xb617ab6c>, (WrappedArticle(id=0, title='Following Charges, Uber Confronts Its Asian Dilemma', summary='<html><head></head><body><img alt="±¤¾È¸®·Î ÇâÇÏ´Â ÅÃ½Ã Taxi toward to Gwangan-ri" class="attachment-large wp-post-image" height="452" src="http://tctechcrunch2011.files.wordpress.com/2014/12/2937814229_c530755f7e_o.jpg?w=680" width="680"/>\xa0The extent governments are willing to go to crack down on Uber has reached a new high-water mark yesterday after Korean prosecutors charged Travis Kalanick, the co-founder and CEO of Uber, of violating local transportation laws. If he were convicted, the punishment could include fines, and perhaps a first for the company and its leadership, a possible jail sentence. Uber has said in a… <a href="http://techcrunch.com/2014/12/24/uber-asian-dilemma/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=R6CIcK_oL-M:PrFJjh3fi8M:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=R6CIcK_oL-M:PrFJjh3fi8M:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=R6CIcK_oL-M:PrFJjh3fi8M:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=R6CIcK_oL-M:PrFJjh3fi8M:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=R6CIcK_oL-M:PrFJjh3fi8M:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=R6CIcK_oL-M:PrFJjh3fi8M:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=R6CIcK_oL-M:PrFJjh3fi8M:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=R6CIcK_oL-M:PrFJjh3fi8M:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/R6CIcK_oL-M" width="1"/></body></html>', url='http://techcrunch.com/2014/12/24/uber-asian-dilemma/?ncid=rss', timestamp=datetime.datetime(2014, 12, 24, 19, 22, 35), origin='1:Danny Crichton', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Danny Crichton', time_unknown=False, origin_id=None, url_id=None),), b'2c74c7c8b210cf30ce5f90df61c00af4d9261cec'
+2014-12-26 06:05:33,796 DEBUG [task queue]: Popped task <function add_article at 0xb617ab6c>, (WrappedArticle(id=0, title='Sony Offers ‘The Interview’ Online For Rent Or Purchase Starting Today At 1 PM ET', summary='<html><head></head><body><img alt="Screen Shot 2014-12-24 at 12.11.17 PM" class="attachment-large wp-post-image" height="398" src="http://tctechcrunch2011.files.wordpress.com/2014/12/screen-shot-2014-12-24-at-12-11-17-pm.jpg?w=680" width="680"/>\xa0Sony will be providing ‘The Interview’ online today for rental ($6) or purchase ($15) in a surprise move. Those looking to get it can head to SeeTheInterview.com, and the movie is set to go live starting today at 10 AM PT, or 1 PM ET.\nSony is offering it in HD quality via Google Play, YouTube Movies\xa0(embed below), and Microsoft’s Xbox Video, as well as at its own… <a href="http://techcrunch.com/2014/12/24/sony-offers-the-interview-online-for-rent-or-purchase-starting-today-at-1-pm-et/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=C8o73d16xos:BjB8XCMmyJQ:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=C8o73d16xos:BjB8XCMmyJQ:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=C8o73d16xos:BjB8XCMmyJQ:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=C8o73d16xos:BjB8XCMmyJQ:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=C8o73d16xos:BjB8XCMmyJQ:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=C8o73d16xos:BjB8XCMmyJQ:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=C8o73d16xos:BjB8XCMmyJQ:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=C8o73d16xos:BjB8XCMmyJQ:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/C8o73d16xos" width="1"/></body></html>', url='http://techcrunch.com/2014/12/24/sony-offers-the-interview-online-for-rent-or-purchase-starting-today-at-1-pm-et/?ncid=rss', timestamp=datetime.datetime(2014, 12, 24, 17, 8, 20), origin='1:Darrell Etherington', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Darrell Etherington', time_unknown=False, origin_id=None, url_id=None),), b'3556a7eb107fd095d5bd7a7e009cf28ff75183f5'
+2014-12-26 06:05:33,802 DEBUG [task queue]: Popped task <function add_article at 0xb617ab6c>, (WrappedArticle(id=0, title='Careful With That Drone Now', summary='<html><head></head><body><img alt="2014-12-22_0840" class="attachment-large wp-post-image" height="335" src="http://tctechcrunch2011.files.wordpress.com/2014/12/2014-12-22_0840.png?w=680" width="680"/>\xa0So you got a drone\xa0for Christmas (or an unmanned flying vehicle, as the FAA likes to call it, or a quadcopter, if you prefer). That’s awesome. But don’t just head into your\xa0backyard and try to fly it without any preparation (unless it’s one of those Parrot MiniDrones, of course). As we reported earlier this week, the FAA would like you to follow a couple of common sense… <a href="http://techcrunch.com/2014/12/25/careful-with-that-drone-now/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=CZPMnXHeITM:8xS653DnJOs:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=CZPMnXHeITM:8xS653DnJOs:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=CZPMnXHeITM:8xS653DnJOs:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=CZPMnXHeITM:8xS653DnJOs:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=CZPMnXHeITM:8xS653DnJOs:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=CZPMnXHeITM:8xS653DnJOs:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=CZPMnXHeITM:8xS653DnJOs:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=CZPMnXHeITM:8xS653DnJOs:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/CZPMnXHeITM" width="1"/></body></html>', url='http://techcrunch.com/2014/12/25/careful-with-that-drone-now/?ncid=rss', timestamp=datetime.datetime(2014, 12, 25, 18, 0, 6), origin='1:Frederic Lardinois', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Frederic Lardinois', time_unknown=False, origin_id=None, url_id=None),), b'59df707fc0205429223947484b48d354a83065d6'
+2014-12-26 06:05:33,818 DEBUG [task queue]: Popped task <function add_article at 0xb617ab6c>, (WrappedArticle(id=0, title='Meet Jeremy Cowart, A Photographer Who Snaps The Homeless With A High-Tech Light Ring And Cellphone', summary='<html><head></head><body><img alt="Screen Shot 2014-12-18 at 6.23.46 PM" class="attachment-large wp-post-image" height="410" src="http://tctechcrunch2011.files.wordpress.com/2014/12/screen-shot-2014-12-18-at-6-23-46-pm.png?w=680" width="680"/>\xa0Some folks look away from homelessness. Jeremy Cowart looks straight at it, with kindness. \nCowart is a Nashville-based celebrity photographer and founded Help-Portrait, a global event that invites photographers to shoot and print portraits of the homeless and people in need in an effort to help people “smile, come together, and remember.” The last event, held in early December… <a href="http://techcrunch.com/2014/12/24/meet-jeremy-cowart-a-photographer-who-snaps-the-homeless-with-a-high-tech-light-ring-and-cellphone/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=mj9hrEhPuiw:uf8FZo4CKCU:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=mj9hrEhPuiw:uf8FZo4CKCU:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=mj9hrEhPuiw:uf8FZo4CKCU:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=mj9hrEhPuiw:uf8FZo4CKCU:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=mj9hrEhPuiw:uf8FZo4CKCU:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=mj9hrEhPuiw:uf8FZo4CKCU:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=mj9hrEhPuiw:uf8FZo4CKCU:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=mj9hrEhPuiw:uf8FZo4CKCU:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/mj9hrEhPuiw" width="1"/></body></html>', url='http://techcrunch.com/2014/12/24/meet-jeremy-cowart-a-photographer-who-snaps-the-homeless-with-a-high-tech-light-ring-and-cellphone/?ncid=rss', timestamp=datetime.datetime(2014, 12, 25, 3, 55, 13), origin='1:John Biggs', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='John Biggs', time_unknown=False, origin_id=None, url_id=None),), b'589eef2307924bd2e33a1e4a09094aa4bee65438'
+2014-12-26 06:05:33,838 DEBUG [task queue]: Popped task <function add_article at 0xb617ab6c>, (WrappedArticle(id=0, title='Hackers Take Credit For PlayStation Network And Xbox Live Outages On Christmas', summary='<html><head></head><body><img alt="Xbox Console" class="attachment-large wp-post-image" height="454" src="http://tctechcrunch2011.files.wordpress.com/2013/11/gx8a0692.jpg?w=680" width="680"/>\xa0Gamers who received new consoles for Christmas might find themselves unable to connect and play with friends, thanks to a coordinated attack by hackers who claim to have taken down the two largest gaming networks. On what might be the biggest gaming day of the year, a hacker group called Lizard Squad is claiming responsibility for taking down both Xbox Live and PlayStation Network. <a href="http://techcrunch.com/2014/12/25/merry-xmas-you-filthy-animals/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=ftL-HrqghEk:lkSkKQniGNo:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=ftL-HrqghEk:lkSkKQniGNo:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=ftL-HrqghEk:lkSkKQniGNo:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=ftL-HrqghEk:lkSkKQniGNo:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=ftL-HrqghEk:lkSkKQniGNo:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=ftL-HrqghEk:lkSkKQniGNo:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=ftL-HrqghEk:lkSkKQniGNo:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=ftL-HrqghEk:lkSkKQniGNo:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/ftL-HrqghEk" width="1"/></body></html>', url='http://techcrunch.com/2014/12/25/merry-xmas-you-filthy-animals/?ncid=rss', timestamp=datetime.datetime(2014, 12, 25, 19, 33, 41), origin='1:Ryan Lawler', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Ryan Lawler', time_unknown=False, origin_id=None, url_id=None),), b'85a900c1036218b61dc2ece14a8797dc635f9de8'
+2014-12-26 06:05:33,865 DEBUG [task queue]: Popped task <function add_article at 0xb617ab6c>, (WrappedArticle(id=0, title='The Enterprise In 2015', summary='<html><head></head><body><img alt="enterprise" class="attachment-large wp-post-image" height="397" src="http://tctechcrunch2011.files.wordpress.com/2014/12/enterprise.jpg?w=680" width="680"/>\xa0At Emergence Capital, we have had the opportunity to invest in visionaries such as Marc Benioff, Aaron Levie and David Sacks who have built major enterprise cloud applications that have formed the basis of the next generation of business software around the world. As we look out to 2015, we are excited to invest in what’s next for the enterprise. <a href="http://techcrunch.com/2014/12/25/the-enterprise-in-2015/?ncid=rss">Read More</a><div class="feedflare">\n<a href="http://feeds.feedburner.com/~ff/Techcrunch?a=8ZFDI75P4EQ:s05zPLNgrxQ:2mJPEYqXBVI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=2mJPEYqXBVI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=8ZFDI75P4EQ:s05zPLNgrxQ:7Q72WNTAKBA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=7Q72WNTAKBA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=8ZFDI75P4EQ:s05zPLNgrxQ:yIl2AUoC8zA"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=yIl2AUoC8zA"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=8ZFDI75P4EQ:s05zPLNgrxQ:-BTjWOF_DHI"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=8ZFDI75P4EQ:s05zPLNgrxQ:-BTjWOF_DHI"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=8ZFDI75P4EQ:s05zPLNgrxQ:D7DqB2pKExk"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?i=8ZFDI75P4EQ:s05zPLNgrxQ:D7DqB2pKExk"/></a> <a href="http://feeds.feedburner.com/~ff/Techcrunch?a=8ZFDI75P4EQ:s05zPLNgrxQ:qj6IDK7rITs"><img border="0" src="http://feeds.feedburner.com/~ff/Techcrunch?d=qj6IDK7rITs"/></a>\n</div><img alt="" height="1" src="//feeds.feedburner.com/~r/Techcrunch/~4/8ZFDI75P4EQ" width="1"/></body></html>', url='http://techcrunch.com/2014/12/25/the-enterprise-in-2015/?ncid=rss', timestamp=datetime.datetime(2014, 12, 25, 16, 0, 39), origin='1:Alison Wagonfeld', image_url=None, source_id=1, origin_img='http://www.techcrunch.com/wp-content/themes/techcrunchmu/images/techcrunch_logo.png', origin_display_name='Alison Wagonfeld', time_unknown=False, origin_id=None, url_id=None),), b'6173bcecee5e23afc285e711f97cde6c93f71a3b'
+2014-12-26 06:05:33,871 INFO [task queue]: Task b'18fc1c39f756be6dbfea9c154bd80cc9bfd5c09a' took -0.09806537628173828 seconds
+2014-12-26 06:05:33,882 INFO [worker]: Worker 8 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f76c>
+2014-12-26 06:05:33,890 INFO [task queue]: Task b'385c04ae5777c5de855cca794990e79554440219' took -0.12327051162719727 seconds
+2014-12-26 06:05:33,890 INFO [task queue]: Task b'9a285d526eb48c85f73f4e1af6c9587ffa34a9e5' took -0.09882092475891113 seconds
+2014-12-26 06:05:33,895 INFO [worker]: Worker 9 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f8ac>
+2014-12-26 06:05:33,895 INFO [worker]: Worker 0 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f50c>
+2014-12-26 06:05:33,908 INFO [task queue]: Task b'3556a7eb107fd095d5bd7a7e009cf28ff75183f5' took -0.10475516319274902 seconds
+2014-12-26 06:05:33,910 INFO [worker]: Worker 1 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f50c>
+2014-12-26 06:05:33,914 INFO [task queue]: Task b'2c74c7c8b210cf30ce5f90df61c00af4d9261cec' took -0.11476349830627441 seconds
+2014-12-26 06:05:33,916 INFO [worker]: Worker 7 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f62c>
+2014-12-26 06:05:33,916 INFO [task queue]: Task b'59df707fc0205429223947484b48d354a83065d6' took -0.10906338691711426 seconds
+2014-12-26 06:05:33,921 INFO [worker]: Worker 6 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f5ac>
+2014-12-26 06:05:33,924 INFO [task queue]: Task b'589eef2307924bd2e33a1e4a09094aa4bee65438' took -0.09978175163269043 seconds
+2014-12-26 06:05:33,927 INFO [worker]: Worker 3 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f54c>
+2014-12-26 06:05:33,933 INFO [task queue]: Task b'85a900c1036218b61dc2ece14a8797dc635f9de8' took -0.09184551239013672 seconds
+2014-12-26 06:05:33,935 INFO [worker]: Worker 2 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f52c>
+2014-12-26 06:05:33,939 INFO [task queue]: Task b'6173bcecee5e23afc285e711f97cde6c93f71a3b' took -0.07179498672485352 seconds
+2014-12-26 06:05:33,939 INFO [worker]: Worker 5 executed a task on Queue <worker.task_queue.TaskQueue object at 0xb718f58c>
+2014-12-26 06:08:56,654 DEBUG [task queue]: Popped task <function user_ai at 0xb71c6104>, ((1,),), b'5c83f4f3c2271e3fa880a04514ff352681fe3a00'
+2014-12-26 06:08:56,756 INFO [add_user]: Attempting to add user (1,) to ai queue.
+2014-12-26 06:08:57,219 INFO [task queue]: Task b'5c83f4f3c2271e3fa880a04514ff352681fe3a00' took -0.5617072582244873 seconds
+2014-12-26 06:08:57,219 INFO [worker]: Worker 10 executed a task on Queue ai_queue
+2014-12-26 06:08:57,220 DEBUG [task queue]: Popped task <function user_ai at 0xb71c6104>, ((1,),), b'e654a337eaf3ad66ca7e5077fff449c7d9229ccf'
+2014-12-26 06:08:57,220 INFO [task queue]: Task b'e654a337eaf3ad66ca7e5077fff449c7d9229ccf' took -0.0002181529998779297 seconds
+2014-12-26 06:08:57,221 INFO [worker]: Worker 10 executed a task on Queue ai_queue
+2014-12-26 06:15:38,673 INFO [add_user]: Attempting to add user (1,) to ai queue.
+2014-12-26 06:15:39,537 DEBUG [task queue]: Popped task <function user_ai at 0xb7168fa4>, ((1,),), b'5c83f4f3c2271e3fa880a04514ff352681fe3a00'
+2014-12-26 06:15:40,033 ERROR [task queue]: Task <function user_ai at 0xb7168fa4>, ((1,),), b'5c83f4f3c2271e3fa880a04514ff352681fe3a00' failed
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/task_queue.py", line 115, in pop_and_execute
+    func(*args)
+  File "/vagrant/rdr/worker/workers.py", line 42, in user_ai
+    serve_user(user_id)
+  File "/vagrant/rdr/skynet/tasks.py", line 62, in serve_user
+    add_articles_for_user(user_id)
+  File "/vagrant/rdr/skynet/tasks.py", line 33, in add_articles_for_user
+    .all()):
+AttributeError: 'Table' object has no attribute 'source_id'
+2014-12-26 06:15:40,041 INFO [task queue]: Task b'5c83f4f3c2271e3fa880a04514ff352681fe3a00' took -0.5032613277435303 seconds
+2014-12-26 06:15:40,041 INFO [worker]: Worker 10 executed a task on Queue ai_queue
+2014-12-26 06:16:47,027 INFO [add_user]: Attempting to add user (1,) to ai queue.
+2014-12-26 06:16:47,937 DEBUG [task queue]: Popped task <function user_ai at 0xb71c5fa4>, ((1,),), b'e654a337eaf3ad66ca7e5077fff449c7d9229ccf'
+2014-12-26 06:16:48,405 INFO [ai_task]: User (1,) is in status b'idle'
+2014-12-26 06:16:48,406 INFO [task queue]: Task b'e654a337eaf3ad66ca7e5077fff449c7d9229ccf' took -0.4684336185455322 seconds
+2014-12-26 06:16:48,407 INFO [worker]: Worker 10 executed a task on Queue ai_queue
+2014-12-26 06:18:16,409 INFO [add_user]: Attempting to add user (1,) to ai queue.
+2014-12-26 06:18:17,293 DEBUG [task queue]: Popped task <function user_ai at 0xb719bfa4>, ((1,),), b'e654a337eaf3ad66ca7e5077fff449c7d9229ccf'
+2014-12-26 06:18:17,752 INFO [ai_task]: User (1,) is in status idle
+2014-12-26 06:18:17,784 ERROR [task queue]: Task <function user_ai at 0xb719bfa4>, ((1,),), b'e654a337eaf3ad66ca7e5077fff449c7d9229ccf' failed
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/task_queue.py", line 115, in pop_and_execute
+    func(*args)
+  File "/vagrant/rdr/worker/workers.py", line 42, in user_ai
+    serve_user(user_id)
+  File "/vagrant/rdr/skynet/tasks.py", line 65, in serve_user
+    add_articles_for_user(user_id)
+  File "/vagrant/rdr/skynet/tasks.py", line 35, in add_articles_for_user
+    .all()):
+AttributeError: 'Table' object has no attribute 'source_id'
+2014-12-26 06:18:17,793 INFO [task queue]: Task b'e654a337eaf3ad66ca7e5077fff449c7d9229ccf' took -0.499375581741333 seconds
+2014-12-26 06:18:17,794 INFO [worker]: Worker 10 executed a task on Queue ai_queue
+2014-12-26 06:28:29,529 INFO [ai_task]: User 1 is in status idle
+2014-12-26 06:29:28,156 INFO [ai_task]: User 1 is in status idle
+2014-12-26 06:30:33,551 INFO [ai_task]: User 1 is in status idle
+2014-12-26 06:31:16,703 INFO [ai_task]: User 1 is in status idle
+2014-12-26 06:31:16,741 INFO [cache]: Cache for key article:27 misses.
+2014-12-26 06:31:18,141 INFO [cache]: Cache for key article:28 misses.
+2014-12-26 06:31:18,153 INFO [cache]: Cache for key article:29 misses.
+2014-12-26 06:31:18,163 INFO [cache]: Cache for key article:30 misses.
+2014-12-26 06:31:18,173 INFO [cache]: Cache for key article:31 misses.
+2014-12-26 06:31:18,185 INFO [cache]: Cache for key article:32 misses.
+2014-12-26 06:31:18,197 INFO [cache]: Cache for key article:21 misses.
+2014-12-26 06:31:18,207 INFO [cache]: Cache for key article:22 misses.
+2014-12-26 06:31:18,218 INFO [cache]: Cache for key article:23 misses.
+2014-12-26 06:31:18,227 INFO [cache]: Cache for key article:24 misses.
+2014-12-26 06:31:18,239 INFO [cache]: Cache for key article:25 misses.
+2014-12-26 06:31:18,250 INFO [cache]: Cache for key article:26 misses.
+2014-12-26 06:31:18,261 INFO [cache]: Cache for key article:33 misses.
+2014-12-26 06:31:18,271 INFO [cache]: Cache for key article:34 misses.
+2014-12-26 06:31:18,284 INFO [cache]: Cache for key article:35 misses.
+2014-12-26 06:31:18,294 INFO [cache]: Cache for key article:36 misses.
+2014-12-26 06:31:18,305 INFO [cache]: Cache for key article:57 misses.
+2014-12-26 06:31:18,319 INFO [cache]: Cache for key article:37 misses.
+2014-12-26 06:31:18,329 INFO [cache]: Cache for key article:38 misses.
+2014-12-26 06:31:18,342 INFO [cache]: Cache for key article:39 misses.
+2014-12-26 06:31:18,353 INFO [cache]: Cache for key article:40 misses.
+2014-12-26 06:31:18,366 INFO [cache]: Cache for key article:41 misses.
+2014-12-26 06:31:18,379 INFO [cache]: Cache for key article:42 misses.
+2014-12-26 06:31:18,389 INFO [cache]: Cache for key article:43 misses.
+2014-12-26 06:31:18,399 INFO [cache]: Cache for key article:44 misses.
+2014-12-26 06:31:18,411 INFO [cache]: Cache for key article:45 misses.
+2014-12-26 06:31:18,420 INFO [cache]: Cache for key article:46 misses.
+2014-12-26 06:31:18,430 INFO [cache]: Cache for key article:47 misses.
+2014-12-26 06:31:18,441 INFO [cache]: Cache for key article:48 misses.
+2014-12-26 06:31:18,452 INFO [cache]: Cache for key article:49 misses.
+2014-12-26 06:31:18,464 INFO [cache]: Cache for key article:50 misses.
+2014-12-26 06:31:18,477 INFO [cache]: Cache for key article:51 misses.
+2014-12-26 06:31:18,486 INFO [cache]: Cache for key article:52 misses.
+2014-12-26 06:31:18,495 INFO [cache]: Cache for key article:53 misses.
+2014-12-26 06:31:18,506 INFO [cache]: Cache for key article:54 misses.
+2014-12-26 06:31:18,516 INFO [cache]: Cache for key article:55 misses.
+2014-12-26 06:31:18,528 INFO [cache]: Cache for key article:56 misses.
+2014-12-26 06:31:18,538 INFO [cache]: Cache for key article:58 misses.
+2014-12-26 06:31:18,550 INFO [cache]: Cache for key article:59 misses.
+2014-12-26 06:31:18,561 INFO [cache]: Cache for key article:60 misses.
+2014-12-26 06:32:05,318 DEBUG [task queue]: Popped task <function crawl at 0xb720b53c>, (1,), b'd7809491a7040f29b71f61ef268906dbaa4834e6'
+2014-12-26 06:32:05,343 DEBUG [task queue]: Popped task <function user_ai at 0xb7196fa4>, ((1,),), b'66448dc0dd0a0b2272b90324f94195caaa7ae08c'
+2014-12-26 06:32:05,557 INFO [add_user]: Attempting to add user (1,) to ai queue.
+2014-12-26 06:32:05,599 INFO [crawler 1]: Starting to crawl
+2014-12-26 06:32:06,046 INFO [ai_task]: User (1,) is in status idle
+2014-12-26 06:32:06,084 INFO [task queue]: Task b'66448dc0dd0a0b2272b90324f94195caaa7ae08c' took -0.7399563789367676 seconds
+2014-12-26 06:32:06,085 INFO [worker]: Worker 10 executed a task on Queue ai_queue
+2014-12-26 06:32:06,085 DEBUG [task queue]: Popped task <function user_ai at 0xb7196fa4>, ((1,),), b'e654a337eaf3ad66ca7e5077fff449c7d9229ccf'
+2014-12-26 06:32:06,086 INFO [ai_task]: User (1,) is in status idle
+2014-12-26 06:32:07,856 INFO [task queue]: Task b'e654a337eaf3ad66ca7e5077fff449c7d9229ccf' took -1.7697052955627441 seconds
+2014-12-26 06:32:07,856 INFO [worker]: Worker 10 executed a task on Queue ai_queue
+2014-12-26 06:32:13,093 INFO [crawler 1]: Article Viewers Worldwide Are Torrenting ‘The Interview’ Despite U.S.-Only Release should not be added
+2014-12-26 06:32:13,097 INFO [crawler 1]: Article Meeting The Challenges In Mobile Health Innovation should not be added
+2014-12-26 06:32:13,102 INFO [crawler 1]: Article In Holiday Document Dump, NSA Declassifies Compliance Errors should not be added
+2014-12-26 06:32:13,106 INFO [crawler 1]: Article The Future Of Wearable Technology Is In The Enterprise (At Least For Now) should not be added
+2014-12-26 06:32:13,111 INFO [crawler 1]: Article Being A Leader Sometimes Means Finding The Willingness And Courage To Be Led should not be added
+2014-12-26 06:32:13,115 INFO [crawler 1]: Article Hackers Take Credit For PlayStation Network And Xbox Live Outages On Christmas should not be added
+2014-12-26 06:32:13,120 INFO [crawler 1]: Article Bitcoin, Burning Man And The Gifting Economy should not be added
+2014-12-26 06:32:13,125 INFO [crawler 1]: Article Careful With That Drone Now should not be added
+2014-12-26 06:32:13,129 INFO [crawler 1]: Article Facebook’s ‘Year In Review’ Feature Will Chronicle Your 2014, Good Or Bad should not be added
+2014-12-26 06:32:13,134 INFO [crawler 1]: Article The Enterprise In 2015 should not be added
+2014-12-26 06:32:13,138 INFO [crawler 1]: Article Meet Jeremy Cowart, A Photographer Who Snaps The Homeless With A High-Tech Light Ring And Cellphone should not be added
+2014-12-26 06:32:13,143 INFO [crawler 1]: Article OnePlus Allowed To Resume Sales In India After Court Order should not be added
+2014-12-26 06:32:13,148 INFO [crawler 1]: Article Rethinking Work-Life Balance should not be added
+2014-12-26 06:32:13,152 INFO [crawler 1]: Article The Key To Successful Commerce Businesses Is Supply Chain should not be added
+2014-12-26 06:32:13,157 INFO [crawler 1]: Article Nubeliu Is Bringing The Private Cloud To Latin America should not be added
+2014-12-26 06:32:13,162 INFO [crawler 1]: Article Group Text+ Makes It Easy To Troll Your Family Over The Holidays should not be added
+2014-12-26 06:32:13,175 INFO [crawler 1]: Article Interactive Content Can Save Content Marketing From The Dark Side should not be added
+2014-12-26 06:32:13,180 INFO [crawler 1]: Article Following Charges, Uber Confronts Its Asian Dilemma should not be added
+2014-12-26 06:32:13,185 INFO [crawler 1]: Article Facebook Signs Up The NFL And Verizon To Test Ads That Play After Video Clips should not be added
+2014-12-26 06:32:13,189 INFO [crawler 1]: Article Sony Offers ‘The Interview’ Online For Rent Or Purchase Starting Today At 1 PM ET should not be added
+2014-12-26 06:32:13,195 INFO [task queue]: Task b'd7809491a7040f29b71f61ef268906dbaa4834e6' took -7.870220899581909 seconds
+2014-12-26 06:32:13,196 INFO [worker]: Worker 8 executed a task on Queue crawler_queue
+2014-12-26 06:33:09,284 INFO [add_user]: Attempting to add user (1,) to ai queue.
+2014-12-26 06:33:10,194 DEBUG [task queue]: Popped task <function user_ai at 0xb70fffa4>, ((1,),), b'5c83f4f3c2271e3fa880a04514ff352681fe3a00'
+2014-12-26 06:33:10,691 INFO [ai_task]: User (1,) is in status idle
+2014-12-26 06:33:10,732 INFO [task queue]: Task b'5c83f4f3c2271e3fa880a04514ff352681fe3a00' took 0.5371012687683105 seconds
+2014-12-26 06:33:10,733 INFO [worker]: Worker 10 executed a task on Queue ai_queue

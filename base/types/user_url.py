@@ -1,9 +1,8 @@
 from sqlalchemy.exc import IntegrityError
 
-from base.database.models import Source, user_source, UserUrl
+from base.database.models import Source, UserUrl
 from base.database.session import db_session
 from base.types.article import WrappedArticle
-import base.config as config
 
 
 class WrappedUserUrl(object):
@@ -14,8 +13,11 @@ class WrappedUserUrl(object):
         super(WrappedUserUrl, self).__init__()
 
     @staticmethod
-    def get_for_user(user_id):
-        articles = db_session.query(UserUrl).filter_by(user_id=user_id, last_action=None).all()
+    def get_for_user(user_id, only_unscored=False):
+        query = db_session.query(UserUrl).filter_by(user_id=user_id, last_action=None)
+        if only_unscored:
+            query = query.filter_by(score=None)
+        articles = query.all()
         for a in articles:
             yield WrappedUserUrl(a)
 
