@@ -125,3 +125,4 @@ class TaskQueue(object):
 crawler_queue = TaskQueue('crawler_queue')
 article_processor = TaskQueue('article_processor')
 ai_queue = TaskQueue('ai_queue')
+async_queue = TaskQueue('async_queue')

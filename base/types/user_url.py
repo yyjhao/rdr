@@ -13,13 +13,26 @@ class WrappedUserUrl(object):
         super(WrappedUserUrl, self).__init__()
 
     @staticmethod
-    def get_for_user(user_id, only_unscored=False):
-        query = db_session.query(UserUrl).filter_by(user_id=user_id, last_action=None)
+    def get_for_user(user_id, only_unscored=False, action_type=None, limit=0, order_by=None):
+        query = db_session.query(UserUrl).filter_by(user_id=user_id, last_action=action_type)
+        articles = []
         if only_unscored:
             query = query.filter_by(score=None)
+        if order_by:
+            if order_by == 'time':
+                query = query.order_by(UserUrl.last_action_timestamp)
+            elif order_by == 'score':
+                query = query.order_by(UserUrl.score.desc())
+        if limit:
+            query = query.limit(limit)
         articles = query.all()
         for a in articles:
             yield WrappedUserUrl(a)
+
+    @staticmethod
+    def get(id):
+        db_entry = UserUrl.get(id)
+        return WrappedUserUrl(db_entry)
 
     @staticmethod
     def get_or_create(url_id, user_id):
@@ -53,6 +66,15 @@ class WrappedUserUrl(object):
     def get_articles(self):
         return WrappedArticle.get_multiple([int(i) for i in self.db_entry.articles.keys()])
 
+    def to_dict(self):
+        articles = self.get_articles()
+        return {
+            'articles': [a.to_dict() for a in articles],
+            'score': self.score,
+            'id': self.id,
+            'url': articles[0].url,
+        }
+
     @property
     def score(self):
         return self.db_entry.score
@@ -68,9 +90,17 @@ class WrappedUserUrl(object):
         self.db_entry.last_action = value
 
     @property
+    def last_action_timestamp(self):
+        return self.db_entry.last_action_timestamp
+    @last_action_timestamp.setter
+    def last_action_timestamp(self, value):
+        self.db_entry.last_action_timestamp = value
+
+    @property
     def id(self):
         return self.db_entry.id
-    @id.setter
-    def id(self, value):
-        self.db_entry.id = value
+
+    @property
+    def user_id(self):
+        return self.db_entry.user_id
     

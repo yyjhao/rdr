@@ -26,8 +26,8 @@ class WrappedArticle(_ArticleProto, Cachable):
     def get_key(cls, id):
         return "article:" + str(id)
 
-    def serialize(self):
-        return json.dumps({
+    def to_dict(self):
+        return {
             "id": self.id,
             "title": self.title,
             "summary": self.summary,
@@ -41,7 +41,10 @@ class WrappedArticle(_ArticleProto, Cachable):
             "time_unknown": self.time_unknown,
             "origin_id": self.origin_id,
             "url_id": self.url_id,
-        })
+        }
+
+    def serialize(self):
+        return json.dumps(self.to_dict())
 
     @classmethod
     def deserialize(cls, string):

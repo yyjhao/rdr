@@ -85,6 +85,11 @@ def network_worker(wid):
     work_for([crawler_queue, article_processor], wid)
 
 
+def async_worker(wid):
+    from worker.task_queue import async_queue
+    work_for([async_queue], wid)
+
+
 def ai_worker(wid):
     from worker.task_queue import ai_queue
     work_for([ai_queue], wid)
@@ -95,5 +100,7 @@ def init():
         Process(target=network_worker, args=(i,)).start()
     for i in range(config.NUM_AI_WORKERS):
         Process(target=ai_worker, args=(i + config.NUM_NETWORK_WORKERS,)).start()
+    for i in range(config.NUM_ASYNC_WORKERS):
+        Process(target=async_worker, args=(i + config.NUM_NETWORK_WORKERS + config.NUM_AI_WORKERS,)).start()
     add_source()
     add_user()

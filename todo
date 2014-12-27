@@ -1,4 +1,4 @@
-integrate AI to taskqueue
-clean up
-revamp api layer to use async
-exponential backoff for delay
+async tasks for api
+upload opml
+user auth
+exponential backoff

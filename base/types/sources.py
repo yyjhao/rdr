@@ -19,6 +19,26 @@ class WrappedSource(object):
         return WrappedSource.init_with_entry(db_session.query(Source).filter_by(id=id).first())
 
     @staticmethod
+    def get_with_ext_id(ext_id):
+        entry = db_session.query(Source).filter_by(ext_id=ext_id)
+        if entry:
+            return WrappedSource.init_with_entry(entry)
+        else:
+            return None
+
+    @staticmethod
+    def get_for_user(user_id):
+        sources = (
+            db_session.query(Source).filter(Source.id.in_(
+                db_session
+                .query(UserSource.source_id)
+                .filter_by(user_id=user_id)
+                .all()
+            ))
+        )
+        return [WrappedSource.init_with_entry(s) for s in sources]
+
+    @staticmethod
     def get_all():
         for entry in db_session.query(Source).all():
             yield WrappedSource.init_with_entry(entry)
@@ -31,7 +51,7 @@ class WrappedSource(object):
             return RssSource(entry)
 
     @classmethod
-    def get_or_create(cls, source):
+    def save(cls, source):
         db_session.add(source)
         try:
             db_session.commit()
@@ -79,6 +99,13 @@ class WrappedSource(object):
     def add_to_user(self, user):
         db_session.execute(UserSource.insert(), user_id=user.id, source_id=self.id)
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self._source.info['name'],
+            'type': self._source.type
+        }
+
 
 class TwitterSource(WrappedSource):
 
@@ -108,8 +135,8 @@ class TwitterSource(WrappedSource):
         source.info['token'] = token
         source.info['token_secret'] = token_secret
         source.type = 'twitter'
-        
-        return cls.get_or_create(source)
+
+        return cls.save(source)
 
     @property
     def since_id(self):
@@ -149,7 +176,7 @@ class RssSource(WrappedSource):
             source.info['url'] = url
             source.info['name'] = d.feed.title
             source.type = 'rss'
-            return cls.get_or_create(source)
+            return cls.save(source)
         return cls(source)
         
 

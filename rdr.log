@@ -1514,3 +1514,24 @@ AttributeError: 'Table' object has no attribute 'source_id'
 2014-12-26 06:33:10,691 INFO [ai_task]: User (1,) is in status idle
 2014-12-26 06:33:10,732 INFO [task queue]: Task b'5c83f4f3c2271e3fa880a04514ff352681fe3a00' took 0.5371012687683105 seconds
 2014-12-26 06:33:10,733 INFO [worker]: Worker 10 executed a task on Queue ai_queue
+2014-12-26 06:47:06,558 DEBUG [task queue]: Popped task <function user_ai at 0xb70fffa4>, ((1,),), b'66448dc0dd0a0b2272b90324f94195caaa7ae08c'
+2014-12-26 06:47:06,558 INFO [ai_task]: User (1,) is in status idle
+2014-12-26 06:47:08,328 INFO [task queue]: Task b'66448dc0dd0a0b2272b90324f94195caaa7ae08c' took 1.7696187496185303 seconds
+2014-12-26 06:47:08,328 INFO [worker]: Worker 10 executed a task on Queue ai_queue
+2014-12-26 06:48:10,451 DEBUG [task queue]: Popped task <function user_ai at 0xb70fffa4>, ((1,),), b'3cb75a75f7144b4d3ccb6ec06ae6d93825a32c76'
+2014-12-26 06:48:10,452 INFO [ai_task]: User (1,) is in status idle
+2014-12-26 06:48:10,464 INFO [task queue]: Task b'3cb75a75f7144b4d3ccb6ec06ae6d93825a32c76' took 0.012427806854248047 seconds
+2014-12-26 06:48:10,465 INFO [worker]: Worker 10 executed a task on Queue ai_queue
+2014-12-27 04:51:20,171 DEBUG [task queue]: Popped task <function _exc_async at 0xb6e60df4>, [<function test at 0xb72e1dac>, (2,), 'e0174d073524773dd9ad0f6cade79ec2191bbb06'], b'237ff70e1083dfab2ad90310fac17b956f6e9df5'
+2014-12-27 04:51:20,172 ERROR [task queue]: Task <function _exc_async at 0xb6e60df4>, [<function test at 0xb72e1dac>, (2,), 'e0174d073524773dd9ad0f6cade79ec2191bbb06'], b'237ff70e1083dfab2ad90310fac17b956f6e9df5' failed
+Traceback (most recent call last):
+  File "/vagrant/rdr/worker/task_queue.py", line 115, in pop_and_execute
+    func(*args)
+  File "/vagrant/rdr/worker/async_task.py", line 34, in _exc_async
+    result = func(**args)
+TypeError: test() argument after ** must be a mapping, not tuple
+2014-12-27 04:51:20,179 INFO [task queue]: Task b'237ff70e1083dfab2ad90310fac17b956f6e9df5' took 0.006604433059692383 seconds
+2014-12-27 04:51:32,236 DEBUG [task queue]: Popped task <function _exc_async at 0xb6e1bdf4>, [<function test at 0xb72b10bc>, (2,), 'e0174d073524773dd9ad0f6cade79ec2191bbb06'], b'237ff70e1083dfab2ad90310fac17b956f6e9df5'
+2014-12-27 04:51:32,236 INFO [task queue]: Task b'237ff70e1083dfab2ad90310fac17b956f6e9df5' took 0.00017213821411132812 seconds
+2014-12-27 04:52:12,467 DEBUG [task queue]: Popped task <function _exc_async at 0xb6d8ddac>, [<function test at 0xb720edac>, (2,), 'e0174d073524773dd9ad0f6cade79ec2191bbb06'], b'237ff70e1083dfab2ad90310fac17b956f6e9df5'
+2014-12-27 04:52:12,467 INFO [task queue]: Task b'237ff70e1083dfab2ad90310fac17b956f6e9df5' took 0.0001850128173828125 seconds

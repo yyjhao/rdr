@@ -3,8 +3,8 @@ from itsdangerous import SignatureExpired, BadSignature
 import dropbox
 from dropbox.rest import ErrorResponse
 
-from base.models import User
-from base.database import db_session
+from base.database.models import User
+from base.database.session import db_session
 import base.config as config
 
 class UserAuth():
@@ -16,7 +16,6 @@ class UserAuth():
         ext_uid = info[u'uid']
         user = db_session.query(User).filter_by(ext_uid=ext_uid).first()
         if not user:
-            print 'creating user'
             user = User()
             user.ext_uid = info[u'uid']
         user.name = info[u'display_name']
@@ -36,7 +35,6 @@ class UserAuth():
             info = client.account_info()
             return self.create_or_update_user_info(info, token)
         except ErrorResponse as e:
-            print e
             return None
 
     def verify_auth_token(self, token):
