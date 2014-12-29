@@ -7,7 +7,7 @@ module.exports = function(apiClient, insecure) {
             if (req.session || (req.cookies && req.cookies.token)) {
                 apiClient.get(req, '/article', function(articles_res) {
                     res.render('index', {
-                        articles: articles_res.body.articles || []
+                        articles: articles_res.body.items || []
                     }, 'ArticleStream');
                 });
             } else {

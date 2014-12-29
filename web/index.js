@@ -25,6 +25,9 @@ var routes = require('./app/routes')(apiClient, config.app.insecure),
 app.use(cookieParser('hackweek'))
 
 app.get('/dropbox_auth', function(req, res) {
+    var api_token = 'meh';
+    res.cookie('token', api_token, { maxAge: 900000, httpOnly: false });
+    return res.redirect('/');
     // rushing
     res.redirect('https://www.dropbox.com/1/oauth2/authorize?client_id=' + config.dropbox.client_id + '&response_type=code&redirect_uri=https://' + config.app.host + '/dropbox_auth_complete');
 });

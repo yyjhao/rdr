@@ -26,36 +26,31 @@ module.exports = React.createClass({
     if (!type) {
       type = "";
     }
-
     return (
       <div className={"article-card " + type} key={article.id}>
-        <div className="card-content">
-          <header className="card-title" dangerouslySetInnerHTML={{__html: article.title}} />
-          { article.summary?
-            <div className="summary" dangerouslySetInnerHTML={{__html: article.summary}} /> :
-            <div className="empty-summary">No summary...</div>
-          }
-        </div>
-        <div className="card-footer">
-          <div className="footer-title">
-            From:
-          </div>
-          {
-            article.origins.map(function(o) {
-              return (
-                <div className="origin-panel">
+      <header>
+        <a href={article.url} target="_blank">{article.url}</a>
+      </header>
+        {
+          article.articles.map(function(a) {
+            return (<div className="article-single">
+              <div className="origin-panel">
                   <div className="image-holder">
-                    <img src={o.image_url} />
+                    <img src={a.origin_img} />
                   </div>
                   <div className="origin-name">
-                    { o.display_name }
+                    { a.origin_display_name }
                   </div>
                 </div>
-              )
-            })
-          }
-        </div>
+              <div className="article-content">
+                <div className="article-title" dangerouslySetInnerHTML={{__html: a.title}} />
+                <div className="article-summary" dangerouslySetInnerHTML={{__html: a.summary}} />
+              </div>
+            </div>)
+          })
+        }
       </div>
+
     )
   },
 

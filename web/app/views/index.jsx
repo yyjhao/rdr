@@ -27,6 +27,6 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    return this.props.session ? this.renderApp() : this.renderLogin();
+    return this.props.controller ? this.renderApp() : this.renderLogin();
   }
 });

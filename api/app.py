@@ -47,6 +47,9 @@ class FakeUser():
     def is_authenticated(self):
         return True
 
+    def to_dict(self):
+        return dict(id=1)
+
 dummy = FakeUser()
 
 
@@ -167,7 +170,7 @@ class ArticleResource(restful.Resource):
 @crossdomain(origin=config.FRONTEND_SERVER)
 def auth():
     return jsonify({
-        'user': current_user.serialize,
+        'user': current_user.to_dict(),
         'error': 0
     })
 

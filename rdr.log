@@ -1535,3 +1535,7 @@ TypeError: test() argument after ** must be a mapping, not tuple
 2014-12-27 04:51:32,236 INFO [task queue]: Task b'237ff70e1083dfab2ad90310fac17b956f6e9df5' took 0.00017213821411132812 seconds
 2014-12-27 04:52:12,467 DEBUG [task queue]: Popped task <function _exc_async at 0xb6d8ddac>, [<function test at 0xb720edac>, (2,), 'e0174d073524773dd9ad0f6cade79ec2191bbb06'], b'237ff70e1083dfab2ad90310fac17b956f6e9df5'
 2014-12-27 04:52:12,467 INFO [task queue]: Task b'237ff70e1083dfab2ad90310fac17b956f6e9df5' took 0.0001850128173828125 seconds
+2014-12-27 08:42:36,667 INFO [cache]: Cache for key article:3 misses.
+2014-12-27 08:42:36,667 INFO [cache]: Cache for key article:5 misses.
+2014-12-27 08:42:38,229 INFO [cache]: Cache for key article:3 misses.
+2014-12-27 08:42:38,230 INFO [cache]: Cache for key article:5 misses.
